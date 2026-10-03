@@ -47,8 +47,11 @@ class EvidenceItem:
             source_result_id=result.id,
         )
 
-    def to_dict(self) -> dict[str, str]:
-        return asdict(self)
+    def to_dict(self) -> dict[str, object]:
+        data = asdict(self)
+        if self.source_result_id is None:
+            data.pop("source_result_id")
+        return data
 
 
 @dataclass(frozen=True)
