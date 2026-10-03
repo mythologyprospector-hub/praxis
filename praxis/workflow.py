@@ -18,6 +18,7 @@ from praxis.evidence import EvidenceItem, EvidenceState
 from praxis.admission import EvidenceAdmission
 from praxis.evidence_admission_request import EvidenceAdmissionRequest
 from praxis.intervention import Intervention
+from praxis.result import Result
 from praxis.result_evidence_admission import admit_result_as_evidence
 from praxis.result_request import ResultRequest
 from praxis.result_provider import ResultRecorder, record_result
