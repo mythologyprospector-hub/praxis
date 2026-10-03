@@ -16,6 +16,8 @@ def assemble_candidate_set(
     interventions: Iterable[Intervention] = (),
 ) -> CandidateSet:
     """Assemble generated candidates under an explicit request."""
+    if not isinstance(request, CandidateRequest):
+        raise TypeError("request must be a CandidateRequest")
     hypotheses = tuple(hypotheses)
     interventions = tuple(interventions)
 
