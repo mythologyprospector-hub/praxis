@@ -122,3 +122,10 @@ Praxis now represents a human decision as a distinct `Decision` object. It recor
 ### 2026-10-03 — Candidate assembly is separate from candidate generation
 
 The first candidate-stage machinery validates and groups externally produced hypotheses/interventions under a `CandidateRequest`. Generation intelligence remains outside this assembly boundary, preventing grouping from becoming implicit ranking, selection, or authority.
+
+
+### 2026-10-03 — Bounded workflow composition preserves both human gates
+
+The workflow coordinator may compose established bounded stages, but composition must not collapse semantic boundaries. The post-decision path is explicitly `Decision → ResultRequest/Result → ResultScope → EvidenceAdmissionRequest → EvidenceAdmission → EvidenceState`. A `Decision` remains a human decision rather than execution; a `Result` remains observation rather than evidence; an admission request grants no authority; and `EvidenceState.admit(...)` remains the actual evidence-state transition. The coordinator validates lineage and orchestrates supplied providers without interpreting the decision or silently authorizing, executing, ranking, selecting, or canonizing anything.
+
+The composition and dedicated workflow tests are CI-verified. Organs integration remains downstream of stable domain semantics.
