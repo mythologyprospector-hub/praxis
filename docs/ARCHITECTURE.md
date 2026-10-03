@@ -64,6 +64,10 @@ An assessment of a hypothesis against explicitly referenced evidence. It records
 
 A proposed change intended to alter an outcome for a defined problem. It may identify the hypotheses it is intended to act upon, but remains a proposal rather than evidence or a result.
 
+### CandidateSet
+
+A bounded collection of candidate hypotheses and/or interventions considered together for a defined problem. It provides grouping without ranking, selecting, authorizing, or executing a candidate. Candidate identity within each collection is unique, and at least one candidate is required.
+
 ### FailureMode
 
 A concrete way a candidate intervention could fail or cause harm. It is an analysis object, not evidence, an intervention, or an observed result. A FailureMode may reference the intervention(s) it challenges while keeping the proposed change distinct from the analysis of how it could go wrong.
