@@ -2,7 +2,11 @@ from __future__ import annotations
 
 import pytest
 
-from praxis.candidate_generation import assemble_candidate_set
+from praxis.candidate_generation import assemble_candidate_set, generate_candidates
+from praxis.context import ReasoningContext
+from praxis.evidence import EvidenceItem, EvidenceState
+from praxis.gap import EvidenceGap
+from praxis.problem import Problem
 from praxis.candidate_request import CandidateRequest
 from praxis.hypothesis import Hypothesis
 from praxis.intervention import Intervention
@@ -87,3 +91,61 @@ def test_assembly_rejects_wrong_intervention_type():
 def test_assembly_rejects_wrong_request_type():
     with pytest.raises(TypeError, match="CandidateRequest"):
         assemble_candidate_set(object())  # type: ignore[arg-type]
+
+
+class _Generator:
+    def generate(self, request, context):
+        return (
+            (Hypothesis(id="h-1", problem_id=request.problem_id, statement="h", rationale="r"),),
+            (Intervention(id="i-1", problem_id=request.problem_id, description="d", intended_outcome="o"),),
+        )
+
+
+def _context():
+    problem = Problem(id="p-1", title="Problem", goal="Learn.")
+    evidence = EvidenceState(
+        problem_id="p-1",
+        items=(EvidenceItem(id="e-1", statement="s", provenance="p", uncertainty="u"),),
+    )
+    gap = EvidenceGap(
+        id="g-1", problem_id="p-1", description="unknown", decision_relevance="relevant"
+    )
+    return ReasoningContext(problem=problem, evidence=evidence, gaps=(gap,))
+
+
+def test_generation_uses_explicit_context_and_provider_boundary():
+    request = CandidateRequest(
+        id="req-1", problem_id="p-1", evidence_ids=("e-1",), gap_ids=("g-1",)
+    )
+    result = generate_candidates(request, _context(), _Generator())
+
+    assert result.hypothesis_ids == ("h-1",)
+    assert result.intervention_ids == ("i-1",)
+
+
+def test_generation_rejects_context_for_another_problem():
+    request = CandidateRequest(id="req-1", problem_id="p-2")
+
+    with pytest.raises(ValueError, match="different problem"):
+        generate_candidates(request, _context(), _Generator())
+
+
+def test_generation_rejects_evidence_outside_context():
+    request = CandidateRequest(id="req-1", problem_id="p-1", evidence_ids=("missing",))
+
+    with pytest.raises(ValueError, match="evidence outside"):
+        generate_candidates(request, _context(), _Generator())
+
+
+def test_generation_rejects_gaps_outside_context():
+    request = CandidateRequest(id="req-1", problem_id="p-1", gap_ids=("missing",))
+
+    with pytest.raises(ValueError, match="gaps outside"):
+        generate_candidates(request, _context(), _Generator())
+
+
+def test_generation_rejects_non_provider():
+    request = CandidateRequest(id="req-1", problem_id="p-1")
+
+    with pytest.raises(TypeError, match="CandidateGenerator"):
+        generate_candidates(request, _context(), object())
