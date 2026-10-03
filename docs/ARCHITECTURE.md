@@ -78,11 +78,11 @@ A bounded request to examine candidate interventions for failure modes and harm.
 
 ### FailureAnalysis
 
+A bounded record linking a `FailureAnalysisRequest` to identified `FailureMode` objects. It preserves uncertainty and remains an analysis artifact: it is not evidence, a decision, authorization, ranking, or execution instruction.
+
 ### Derivation
 
 A bounded trace record describing how an artifact was produced from explicit source identities, method, and uncertainty. It records lineage without asserting evidentiary validity or authorizing a decision.
-
-A bounded record linking a `FailureAnalysisRequest` to identified `FailureMode` objects. It preserves uncertainty and remains an analysis artifact: it is not evidence, a decision, authorization, ranking, or execution instruction.
 
 ### Model
 
