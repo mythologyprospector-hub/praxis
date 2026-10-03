@@ -1,7 +1,7 @@
 """Bounded assembly for test plans."""
 from __future__ import annotations
 
-from .test import Test
+from praxis.test import Test
 from .test_request import TestRequest
 
 
