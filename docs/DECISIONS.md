@@ -94,3 +94,7 @@ Praxis now represents a human decision as a distinct `Decision` object. It recor
 ### 2026-10-03 — Result scope is explicit
 
 `ResultScope` makes the relationship between an observed result, its bounded test, and interventions explicit. Scope does not confer evidentiary or decision authority.
+
+### 2026-10-03 — Test design receives an explicit request boundary
+
+`TestRequest` makes the inputs to bounded test design explicit. It remains a request only and does not design, authorize, or execute a test.
