@@ -75,6 +75,20 @@ It is deliberately an analysis object rather than evidence or an observed result
 
 Represent bounded tests with explicit objectives, expected observations, safety constraints, reversibility, and decision criteria.
 
+**Status:** first bounded-test boundary established and tested; test execution machinery is not yet implemented.
+
+The current `Test` object records:
+
+- the defined problem it belongs to;
+- the learning objective;
+- expected observations;
+- safety constraints;
+- a reversibility description;
+- decision criteria;
+- optional intervention references.
+
+It is deliberately a plan for learning rather than an observed result.
+
 ## Phase 5 — Result capture
 
 Capture actual observations and preserve their provenance.
