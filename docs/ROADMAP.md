@@ -197,3 +197,9 @@ Every phase requires explicit review before the next consequential capability is
 **Status:** first bounded evaluation request boundary established and tested.
 
 `EvaluationRequest` makes the hypothesis, evidence, gaps, and constraints entering evaluation explicit. Evaluation machinery remains distinct from the evidence state and from the resulting `HypothesisEvaluation`.
+
+### Model request boundary
+
+**Status:** first bounded model-request boundary established and tested.
+
+`ModelRequest` makes the purpose and supporting inputs to model construction explicit. Model construction/execution machinery remains unimplemented, and model outputs do not become evidence automatically.
