@@ -1,0 +1,18 @@
+"""Bounded assembly for test plans."""
+from __future__ import annotations
+
+from .test import Test
+from .test_request import TestRequest
+
+
+def assemble_test(request: TestRequest, test: Test) -> Test:
+    """Validate a Test against its explicit design request."""
+    if not isinstance(test, Test):
+        raise TypeError("test must be a Test")
+    if test.id == request.id:
+        raise ValueError("test identity must differ from request identity")
+    if test.problem_id != request.problem_id:
+        raise ValueError("test belongs to a different problem")
+    if request.intervention_ids and not set(request.intervention_ids).issubset(test.intervention_ids):
+        raise ValueError("test does not reference all requested interventions")
+    return test
