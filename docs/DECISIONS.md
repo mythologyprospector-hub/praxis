@@ -45,3 +45,7 @@ A Result records what was observed during a bounded test, including provenance a
 ### 2026-10-03 — Result-to-evidence promotion is explicit and traceable
 
 A Result must not silently become evidence. The first closed-loop boundary uses explicit EvidenceItem.from_result(...) admission and retains the source Result identifier, provenance, and uncertainty. Broader workflow and decision criteria remain future work.
+
+### 2026-10-03 — Evidence-state admission requires a recorded authorization
+
+Adding evidence to an EvidenceState is an epistemic state change, so it must not be an implicit side effect of creating an EvidenceItem. The first gate is an EvidenceAdmission record containing the problem, evidence identity, authorizing human reference, and rationale. EvidenceState.admit(...) requires a matching admission and does not itself invent or infer authorization.
