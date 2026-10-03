@@ -17,6 +17,11 @@ Its purpose is to let the steward reconstruct the current project state from the
 
 ## Current state
 
+**2026-10-03 — Candidate-set boundary implemented**
+
+`CandidateSet` now provides a minimal immutable grouping boundary for candidate hypotheses and/or interventions belonging to a defined problem. It requires at least one candidate and unique identities within each candidate type, while deliberately providing no ranking, selection, authorization, or execution semantics.
+
+
 **2026-10-03 — Human decision boundary implemented**
 
 `Decision` now explicitly records a human decision, rationale, decision-maker reference, and optional subject identity without executing anything. Tests cover required authority/rationale and deterministic serialization. This establishes the human-decision boundary needed between proposal/test design and consequential progression.
