@@ -46,7 +46,7 @@ What is currently known for the problem, represented as explicit EvidenceItems.
 
 ### Hypothesis
 
-A proposed explanation or mechanism that could affect the problem.
+A proposed explanation or mechanism that could affect the problem. It is explicitly separate from EvidenceItem and does not become evidence merely by being represented.
 
 ### Intervention
 
