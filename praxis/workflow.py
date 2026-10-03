@@ -77,6 +77,7 @@ class WorkflowPreparation:
     """Validated artifacts produced before the human decision gate."""
 
     request: WorkflowRequest
+    context: ReasoningContext
     candidates: CandidateGenerationResult
     evaluations: tuple[EvaluationOutput, ...] = ()
     failure_analysis: FailureAnalysisOutput | None = None
@@ -172,6 +173,7 @@ def prepare_workflow(
 
     return WorkflowPreparation(
         request=request,
+        context=context,
         candidates=candidates,
         evaluations=evaluations,
         failure_analysis=failure_analysis,
@@ -237,6 +239,7 @@ def complete_workflow(
         decision,
         candidate_sets=(preparation.candidates.candidate_set,),
         tests=(test,),
+        evidence_items=preparation.context.evidence.items,
     )
     assemble_decision_scope(
         decision_scope,
