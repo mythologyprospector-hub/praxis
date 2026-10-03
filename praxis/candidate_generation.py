@@ -32,20 +32,18 @@ def assemble_candidate_set(
         if not set(item.evidence_ids).issubset(request.evidence_ids):
             raise ValueError("hypothesis references evidence outside the request")
 
-    hypothesis_ids = {item.id for item in hypotheses}
-    intervention_ids = {item.id for item in interventions}
-    if hypothesis_ids & intervention_ids:
-        raise ValueError("candidate ids must be unique across candidate types")
-    intervention_ids = {item.id for item in interventions}
-    if hypothesis_ids & intervention_ids:
-        raise ValueError("candidate ids must be unique across candidate types")
     for item in interventions:
         if not isinstance(item, Intervention):
             raise TypeError("interventions must contain Intervention objects")
         if item.problem_id != request.problem_id:
             raise ValueError("intervention belongs to a different problem")
-        if not set(item.hypothesis_ids).issubset(hypothesis_ids):
+        if not set(item.hypothesis_ids).issubset({item.id for item in hypotheses}):
             raise ValueError("intervention references hypotheses outside the candidate set")
+
+    hypothesis_ids = {item.id for item in hypotheses}
+    intervention_ids = {item.id for item in interventions}
+    if hypothesis_ids & intervention_ids:
+        raise ValueError("candidate ids must be unique across candidate types")
 
     if not hypotheses and not interventions:
         raise ValueError("candidate generation produced no candidates")
