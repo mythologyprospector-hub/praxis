@@ -126,6 +126,71 @@ def test_generation_uses_explicit_context_and_provider_boundary():
     assert result.intervention_ids == ("i-1",)
 
 
+
+def test_generation_requires_derivation_for_every_candidate():
+    request = CandidateRequest(id="req-1", problem_id="p-1", gap_ids=("g-1",))
+    from praxis.derivation import Derivation
+
+    class _BadGenerator:
+        def generate(self, request, context):
+            return CandidateGenerationOutput(
+                hypotheses=(
+                    Hypothesis(id="h-1", problem_id="p-1", statement="h", rationale="r"),
+                ),
+                interventions=(
+                    Intervention(
+                        id="i-1",
+                        problem_id="p-1",
+                        description="d",
+                        intended_outcome="o",
+                    ),
+                ),
+                derivations=(
+                    Derivation(
+                        id="d-h",
+                        artifact_id="h-1",
+                        source_ids=("g-1",),
+                        method="m",
+                        uncertainty="u",
+                    ),
+                ),
+            )
+
+    with pytest.raises(ValueError, match="exactly one derivation"):
+        generate_candidates(request, _context(), _BadGenerator())
+
+
+def test_generation_rejects_duplicate_derivation_for_candidate():
+    request = CandidateRequest(id="req-1", problem_id="p-1", gap_ids=("g-1",))
+    from praxis.derivation import Derivation
+
+    class _BadGenerator:
+        def generate(self, request, context):
+            return CandidateGenerationOutput(
+                hypotheses=(
+                    Hypothesis(id="h-1", problem_id="p-1", statement="h", rationale="r"),
+                ),
+                derivations=(
+                    Derivation(
+                        id="d-1",
+                        artifact_id="h-1",
+                        source_ids=("g-1",),
+                        method="m",
+                        uncertainty="u",
+                    ),
+                    Derivation(
+                        id="d-2",
+                        artifact_id="h-1",
+                        source_ids=("g-1",),
+                        method="m",
+                        uncertainty="u",
+                    ),
+                ),
+            )
+
+    with pytest.raises(ValueError, match="exactly one derivation"):
+        generate_candidates(request, _context(), _BadGenerator())
+
 def test_generation_requires_derivation_output():
     request = CandidateRequest(id="req-1", problem_id="p-1")
     class _BadGenerator:
