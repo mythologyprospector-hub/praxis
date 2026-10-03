@@ -37,3 +37,7 @@ A failure mode represents a concrete way a candidate intervention could fail or 
 ### 2026-10-03 — Tests remain plans, not results
 
 A Test defines a bounded way to learn about a candidate intervention, including its objective, expected observations, safety constraints, reversibility, and decision criteria. It does not claim that the test occurred or that its expected observations were observed.
+
+### 2026-10-03 — Results remain distinct from evidence until incorporated
+
+A Result records what was observed during a bounded test, including provenance and uncertainty. It is distinct from the Test plan and is not automatically treated as part of the problem's evidence state. A later closed-loop workflow must explicitly determine when and how results become evidence.
