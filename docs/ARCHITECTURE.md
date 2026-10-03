@@ -183,3 +183,10 @@ A bounded request to formulate a decision for human consideration. It makes the 
 ### Decision lineage assembly
 
 `validate_decision_lineage(...)` is the bounded lineage gate beneath `DecisionRequest`. It verifies that referenced candidate sets, tests, results, and evidence are supplied; that candidate sets and tests belong to the request's problem; that results point to supplied tests; and that result-derived evidence points to a requested result. It preserves the distinction between preparing a decision for human consideration and actually making or executing that decision.
+
+
+## Workflow composition boundary
+
+The bounded provider stages are intended to compose into a reusable problem-solving workflow without collapsing their semantic boundaries. Composition may sequence Frame → Ground → Expose gaps → Generate → Evaluate → Attack → Model → Design test → Gate → Observe → Learn, while preserving each request, artifact, derivation, and human-gating transition as an explicit boundary.
+
+A workflow coordinator must orchestrate supplied providers and validate stage-to-stage lineage; it must not contain hidden reasoning, rank or select candidates, authorize consequential action, execute real-world interventions, or silently admit results as evidence. The human decision and evidence-admission gates remain explicit transitions in the composed workflow.
