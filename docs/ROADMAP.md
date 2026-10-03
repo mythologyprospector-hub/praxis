@@ -114,6 +114,8 @@ Connect results back into the problem's evidence state and, where appropriate, t
 
 A result-derived EvidenceItem must be created explicitly and retains the source Result identifier, provenance, and uncertainty. A Result is never silently promoted into evidence merely because it exists.
 
+`EvidenceAdmission` is the first human-gating boundary: it records who authorized admission, the rationale, and the exact problem/evidence identities. `EvidenceState.admit(...)` requires that authorization and refuses cross-problem or mismatched-evidence admission.
+
 ## Phase 7 — Cross-domain reasoning
 
 Investigate carefully bounded use of Renaissance outputs.
