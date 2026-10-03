@@ -16,7 +16,15 @@ This is a research/build roadmap, not a promise of implementation.
 
 Create a minimal, inspectable representation for a defined problem.
 
-**Status:** initial substrate implemented and verified by CI.
+**Status:** evidence-state boundary implemented and verified by tests.
+
+The Phase 1 substrate now contains:
+
+- `Problem` — the human-defined problem;
+- `EvidenceItem` — an evidence-bearing statement with provenance and uncertainty;
+- `EvidenceState` — evidence explicitly associated with a problem.
+
+The remaining Phase 1 work is to establish the distinction between evidence and hypotheses/proposals before moving into candidate generation.
 
 The current `Problem` object preserves:
 
@@ -31,7 +39,7 @@ The current `Problem` object preserves:
 
 It also has deterministic serialization suitable for later transport or persistence.
 
-The remaining Phase 1 work is to establish the boundary between a Problem and its evidence state before moving into candidate generation.
+
 
 ## Phase 2 — Candidate generation
 
