@@ -218,6 +218,19 @@ def complete_workflow(
     if preparation.test is None:
         raise ValueError("workflow preparation must contain a designed test")
     test = preparation.test.test
+    problem_id = preparation.request.problem_id
+
+    for name, artifact in (
+        ("decision_request", decision_request),
+        ("decision_scope", decision_scope),
+        ("result_request", result_request),
+        ("result_scope", result_scope),
+        ("evidence_admission_request", evidence_admission_request),
+        ("evidence_admission", evidence_admission),
+        ("evidence_state", evidence_state),
+    ):
+        if getattr(artifact, "problem_id", None) != problem_id:
+            raise ValueError(f"{name} belongs to a different workflow problem")
 
     assemble_decision(
         decision_request,
