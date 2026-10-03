@@ -72,6 +72,12 @@ The current `CandidateRequest` makes generation inputs explicit: problem identit
 
 `FailureAnalysisRequest` makes the attack inputs explicit: problem identity, intervention references, optional hypothesis/model references, focus areas, and constraints. It deliberately does not create findings, rank candidates, assign risk judgments, authorize action, or execute anything.
 
+### Failure-analysis result boundary
+
+**Status:** first bounded failure-analysis result boundary established and tested; broader failure-analysis machinery is not yet implemented.
+
+`FailureAnalysis` links a request to explicit failure-mode identities and preserves uncertainty. It does not authorize, rank, execute, or convert findings into evidence automatically.
+
 ## Model boundary
 
 **Status:** first bounded model boundary established and tested; model-execution machinery is not yet implemented.
