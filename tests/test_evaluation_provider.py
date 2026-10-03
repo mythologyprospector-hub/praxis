@@ -1,4 +1,13 @@
+import pytest
+
 from praxis.context import ReasoningContext
+from praxis.derivation import Derivation
+from praxis.evaluation import HypothesisEvaluation
+from praxis.evaluation_provider import EvaluationOutput, evaluate_hypothesis
+from praxis.evaluation_request import EvaluationRequest
+from praxis.hypothesis import Hypothesis
+
+
 from praxis.derivation import Derivation
 from praxis.evaluation import HypothesisEvaluation
 from praxis.evaluation_provider import EvaluationOutput, evaluate_hypothesis
@@ -45,14 +54,14 @@ class _Evaluator:
 
 
 def test_evaluation_uses_explicit_provider_boundary():
-    request = __import__("praxis.evaluation_request", fromlist=["EvaluationRequest"]).EvaluationRequest(
+    request = EvaluationRequest(
         id="req-1",
         problem_id="p-1",
         hypothesis_id="h-1",
         evidence_ids=("e-1",),
         gap_ids=("g-1",),
     )
-    hypothesis = __import__("praxis.hypothesis", fromlist=["Hypothesis"]).Hypothesis(
+    hypothesis = Hypothesis(
         id="h-1", problem_id="p-1", statement="h", rationale="r"
     )
 
@@ -75,7 +84,6 @@ def test_evaluation_rejects_output_of_wrong_type():
         id="h-1", problem_id="p-1", statement="h", rationale="r"
     )
 
-    import pytest
     with pytest.raises(TypeError, match="EvaluationOutput"):
         evaluate_hypothesis(request, _context(), hypothesis, _BadEvaluator())
 
@@ -101,7 +109,6 @@ def test_evaluation_requires_derivation_to_target_evaluation():
         id="h-1", problem_id="p-1", statement="h", rationale="r"
     )
 
-    import pytest
     with pytest.raises(ValueError, match="must target the evaluation"):
         evaluate_hypothesis(request, _context(), hypothesis, _BadEvaluator())
 
@@ -114,6 +121,5 @@ def test_evaluation_rejects_request_evidence_outside_context():
         id="h-1", problem_id="p-1", statement="h", rationale="r"
     )
 
-    import pytest
     with pytest.raises(ValueError, match="evidence outside"):
         evaluate_hypothesis(request, _context(), hypothesis, _Evaluator())
