@@ -98,3 +98,7 @@ Praxis now represents a human decision as a distinct `Decision` object. It recor
 ### 2026-10-03 — Test design receives an explicit request boundary
 
 `TestRequest` makes the inputs to bounded test design explicit. It remains a request only and does not design, authorize, or execute a test.
+
+### 2026-10-03 — Result capture receives an explicit request boundary
+
+`ResultRequest` separates the request to capture observations from the resulting `Result`. It does not confer evidentiary or decision authority.
