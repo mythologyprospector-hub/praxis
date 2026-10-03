@@ -185,3 +185,9 @@ Every phase requires explicit review before the next consequential capability is
 **Status:** first bounded result-capture request boundary established and tested.
 
 `ResultRequest` makes the test and observation-capture inputs explicit before a `Result` is recorded. It does not promote observations to evidence or make decisions.
+
+### Evidence-admission request boundary
+
+**Status:** first explicit request boundary established and tested.
+
+`EvidenceAdmissionRequest` separates asking for admission of result-derived evidence from the actual human authorization recorded by `EvidenceAdmission`. A request never silently authorizes admission.
