@@ -11,6 +11,8 @@ from praxis.decision_request import DecisionRequest
 from praxis.decision_scope import DecisionScope
 from praxis.evidence import EvidenceItem, EvidenceState
 from praxis.evidence_admission_request import EvidenceAdmissionRequest
+from praxis.context import ReasoningContext
+from praxis.problem import Problem
 from praxis.intervention import Intervention
 from praxis.result import Result
 from praxis.result_provider import ResultOutput
@@ -52,6 +54,13 @@ def _preparation() -> WorkflowPreparation:
         decision_criteria=("use observation",),
         intervention_ids=("intervention-1",),
     )
+    context = ReasoningContext(
+        problem=Problem(id="problem-1", title="Problem", goal="Learn."),
+        evidence=EvidenceState(
+            problem_id="problem-1",
+            items=(EvidenceItem(id="evidence-grounded", statement="Existing evidence.", provenance="source", uncertainty="limited"),),
+        ),
+    )
     return WorkflowPreparation(
         request=WorkflowRequest(
             id="workflow-1",
@@ -63,6 +72,7 @@ def _preparation() -> WorkflowPreparation:
                 requested_types=("intervention",),
             ),
         ),
+        context=context,
         candidates=CandidateGenerationResult(
             candidate_set=CandidateSet(
                 id="candidates-1",
@@ -85,6 +95,7 @@ def test_complete_workflow_crosses_both_human_gates():
             subject_id="test-1",
             candidate_ids=("candidates-1",),
             test_ids=("test-1",),
+            evidence_ids=("evidence-grounded",),
         ),
         Decision(
             id="decision-1",
@@ -149,6 +160,7 @@ def test_complete_workflow_requires_predecision_test():
     preparation = _preparation()
     preparation = WorkflowPreparation(
         request=preparation.request,
+        context=preparation.context,
         candidates=preparation.candidates,
     )
 
