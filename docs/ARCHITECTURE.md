@@ -78,7 +78,7 @@ What was observed when a bounded test was performed. A Result records the observ
 
 ### Decision
 
-A human decision about whether and how to proceed. Evidence admission is one such consequential epistemic decision and is recorded separately from the evidence itself.
+A recorded human decision about whether and how to proceed within a defined problem. It records the decision, rationale, human decision reference, and optional subject identity. It does not execute the decision. Evidence admission remains a specialized epistemic gate recorded separately from the evidence itself.
 
 ## Proposed pipeline
 
