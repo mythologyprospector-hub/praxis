@@ -18,6 +18,8 @@ def assemble_test(
     model: Model | None = None,
 ) -> Test:
     """Validate a Test against its explicit design request."""
+    if not isinstance(request, TestRequest):
+        raise TypeError("request must be a TestRequest")
     if not isinstance(test, Test):
         raise TypeError("test must be a Test")
     if test.id == request.id:
