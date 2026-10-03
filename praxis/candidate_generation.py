@@ -2,9 +2,12 @@
 from __future__ import annotations
 
 from collections.abc import Iterable
+from dataclasses import dataclass
 from typing import Protocol, runtime_checkable
 
 from praxis.context import ReasoningContext
+from praxis.derivation import Derivation
+from praxis.derivation_assembly import assemble_derivation
 
 from praxis.candidate import CandidateSet
 from praxis.candidate_request import CandidateRequest
@@ -13,13 +16,23 @@ from praxis.intervention import Intervention
 
 
 @runtime_checkable
+@dataclass(frozen=True)
+class CandidateGenerationOutput:
+    """Generated candidates plus explicit derivations for each artifact."""
+
+    hypotheses: tuple[Hypothesis, ...] = ()
+    interventions: tuple[Intervention, ...] = ()
+    derivations: tuple[Derivation, ...] = ()
+
+
+@runtime_checkable
 class CandidateGenerator(Protocol):
     """Provider boundary for generating unranked candidate artifacts."""
 
     def generate(
         self, request: CandidateRequest, context: ReasoningContext
-    ) -> tuple[Iterable[Hypothesis], Iterable[Intervention]]:
-        """Generate candidate artifacts without ranking, selecting, or executing them."""
+    ) -> CandidateGenerationOutput:
+        """Generate candidates and their explicit derivation traces."""
 
 
 def generate_candidates(
@@ -40,9 +53,19 @@ def generate_candidates(
         raise ValueError("request references evidence outside the reasoning context")
     if not set(request.gap_ids).issubset({gap.id for gap in context.gaps}):
         raise ValueError("request references gaps outside the reasoning context")
-    hypotheses, interventions = generator.generate(request, context)
+    output = generator.generate(request, context)
+    if not isinstance(output, CandidateGenerationOutput):
+        raise TypeError("generator must return CandidateGenerationOutput")
+    candidate_ids = {item.id for item in output.hypotheses} | {item.id for item in output.interventions}
+    for derivation in output.derivations:
+        if derivation.artifact_id not in candidate_ids:
+            raise ValueError("derivation targets an artifact outside generated candidates")
+        assemble_derivation(
+            derivation,
+            tuple(candidate_ids) + tuple(request.gap_ids) + tuple(request.evidence_ids),
+        )
     return assemble_candidate_set(
-        request, hypotheses=hypotheses, interventions=interventions
+        request, hypotheses=output.hypotheses, interventions=output.interventions
     )
 
 
@@ -52,7 +75,7 @@ class GapDirectedCandidateGenerator:
 
     def generate(
         self, request: CandidateRequest, context: ReasoningContext
-    ) -> tuple[tuple[Hypothesis, ...], tuple[Intervention, ...]]:
+    ) -> CandidateGenerationOutput:
         gaps = tuple(gap for gap in context.gaps if gap.id in request.gap_ids)
         if not gaps:
             raise ValueError(
@@ -61,6 +84,7 @@ class GapDirectedCandidateGenerator:
 
         hypotheses = []
         interventions = []
+        derivations = []
 
         for gap in gaps:
             hypothesis_id = f"{request.id}:hypothesis:{gap.id}"
