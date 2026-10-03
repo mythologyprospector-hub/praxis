@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 from collections.abc import Iterable
-from typing import Protocol
+from typing import Protocol, runtime_checkable
 
 from praxis.context import ReasoningContext
 
@@ -12,6 +12,7 @@ from praxis.hypothesis import Hypothesis
 from praxis.intervention import Intervention
 
 
+@runtime_checkable
 class CandidateGenerator(Protocol):
     """Provider boundary for generating unranked candidate artifacts."""
 
