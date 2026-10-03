@@ -62,7 +62,7 @@ A concrete way a candidate intervention could fail or cause harm. It is an analy
 
 ### Test
 
-A bounded method for learning whether a candidate intervention behaves as expected.
+A bounded method for learning about a candidate intervention. A Test defines an objective, expected observations, safety constraints, reversibility, and decision criteria. It is a plan for learning, not an observed result.
 
 ### Result
 
