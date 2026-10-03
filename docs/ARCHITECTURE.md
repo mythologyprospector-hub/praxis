@@ -36,6 +36,10 @@ What someone is trying to solve.
 
 A problem is not complete merely because it has a title. It should carry the goal, constraints, values, non-negotiables, stakeholders, risks, and tradeoffs that materially define the problem.
 
+### ReasoningContext
+
+An immutable snapshot pairing a defined `Problem` with the matching `EvidenceState`. It is an input boundary for reasoning machinery, not an inference or decision. It refuses evidence belonging to another problem.
+
 ### EvidenceItem
 
 A single evidence-bearing statement. It must retain provenance and an explicit description of uncertainty. A result-derived EvidenceItem records its source Result so the admission path remains inspectable.
