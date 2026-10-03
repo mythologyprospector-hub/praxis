@@ -29,3 +29,7 @@ A hypothesis evaluation records an inference, uncertainty, and explicit referenc
 ### 2026-10-03 — Intervention remains a proposal
 
 An intervention records a proposed change and intended outcome for a defined problem, with optional links to hypotheses. It does not carry evidentiary status and does not imply that the intended outcome has occurred.
+
+### 2026-10-03 — Failure analysis remains separate from intervention and evidence
+
+A failure mode represents a concrete way a candidate intervention could fail or cause harm. It may reference the intervention it challenges, but it remains an analysis object rather than evidence, an intervention, or an observed result.
