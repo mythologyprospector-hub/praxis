@@ -134,3 +134,7 @@ The composition and dedicated workflow tests are CI-verified. Organs integration
 
 The composed post-decision workflow now validates that every downstream request, scope, authorization, and evidence state belongs to the same problem as the prepared workflow before invoking later stages. Individual assembly boundaries remain responsible for artifact identity and lineage. No new workflow identity semantics are introduced; the existing problem identity is the composition boundary.
 
+
+### 2026-10-03 — Workflow preparation retains grounded decision inputs
+
+A completed workflow must preserve the ReasoningContext used during preparation so the human decision boundary can validate references to pre-existing evidence. Decision formulation may depend on grounded evidence already present before the test; the coordinator must pass those evidence items into decision-lineage assembly rather than narrowing the decision gate to newly generated candidates and tests. This preserves provenance without turning evidence into authority or allowing the coordinator to interpret the decision.
