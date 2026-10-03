@@ -17,6 +17,12 @@ Its purpose is to let the steward reconstruct the current project state from the
 
 ## Current state
 
+**2026-10-03 — Phase 4 bounded-test boundary implemented**
+
+The first Phase 4 domain boundary now exists in `praxis/test.py`, with tests in `tests/test_test.py`. `Test` represents a bounded plan for learning about a candidate intervention: objective, expected observations, safety constraints, reversibility, decision criteria, and optional intervention references. It remains explicitly distinct from an observed result.
+
+Local verification of this latest commit is pending.
+
 **2026-10-03 — Phase 3 failure-mode boundary implemented**
 
 The first Phase 3 domain boundary now exists in `praxis/failure.py`, with tests in `tests/test_failure.py`. `FailureMode` represents a concrete way a candidate intervention could fail or cause harm, with severity and likelihood descriptors and optional intervention references. It remains explicitly distinct from evidence, interventions, and observed results.
