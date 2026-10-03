@@ -16,15 +16,17 @@ This is a research/build roadmap, not a promise of implementation.
 
 Create a minimal, inspectable representation for a defined problem.
 
-**Status:** evidence-state boundary implemented and verified by tests.
+**Status:** evidence-state boundary and evaluation boundary implemented and verified by tests.
 
 The Phase 1 substrate now contains:
 
 - `Problem` — the human-defined problem;
 - `EvidenceItem` — an evidence-bearing statement with provenance and uncertainty;
-- `EvidenceState` — evidence explicitly associated with a problem.
+- `EvidenceState` — evidence explicitly associated with a problem;
+- `Hypothesis` — a proposed explanation or mechanism that may reference evidence without becoming evidence;
+- `HypothesisEvaluation` — an inference about a hypothesis with explicit uncertainty and evidence references, kept distinct from evidence.
 
-The evidence/hypothesis distinction is represented and tested. Hypotheses may now reference supporting EvidenceItem IDs without inheriting evidentiary status. The remaining Phase 1 work is to define evaluation records that preserve the distinction between evidence, inference, and hypothesis.
+The evidence/hypothesis/evaluation distinctions are represented and tested.
 
 The current `Problem` object preserves:
 
@@ -38,8 +40,6 @@ The current `Problem` object preserves:
 - unacceptable tradeoffs.
 
 It also has deterministic serialization suitable for later transport or persistence.
-
-
 
 ## Phase 2 — Candidate generation
 
