@@ -172,6 +172,8 @@ A bounded request to formulate a decision for human consideration. It makes the 
 
 ### Candidate generation assembly
 
+`generate_candidates(...)` is the bounded candidate-generation workflow. It validates the provider boundary, preserves a `CandidateSet` together with explicit `Derivation` traces, and keeps generation lineage distinct from evidence, evaluation, ranking, selection, authorization, and execution.
+
 `assemble_candidate_set(...)` is the first bounded candidate-stage machinery. It accepts a `CandidateRequest` plus already-generated `Hypothesis` and `Intervention` objects, validates problem identity and requested types, and groups them into a `CandidateSet`. It deliberately does not contain generation intelligence, ranking, selection, authorization, or execution.
 
 ### Decision lineage assembly
