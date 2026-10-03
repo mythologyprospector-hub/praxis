@@ -61,3 +61,18 @@ def test_assembly_requires_output():
 
     with pytest.raises(ValueError):
         assemble_candidate_set(request)
+
+
+def test_assembly_rejects_id_collision_across_candidate_types():
+    request = CandidateRequest(id="req-1", problem_id="p-1")
+    hypothesis = Hypothesis(
+        id="same-id", problem_id="p-1", statement="h", rationale="r"
+    )
+    intervention = Intervention(
+        id="same-id", problem_id="p-1", description="d", intended_outcome="o"
+    )
+
+    with pytest.raises(ValueError, match="unique"):
+        assemble_candidate_set(
+            request, hypotheses=(hypothesis,), interventions=(intervention,)
+        )
