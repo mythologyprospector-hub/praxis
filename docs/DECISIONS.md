@@ -71,3 +71,6 @@ Evidence and gap collections are state-bearing inputs, so duplicate identities w
 
 Praxis now represents a human decision as a distinct `Decision` object. It records what was decided, why, the human decision reference, and optionally the subject of the decision. Recording a decision does not execute it; consequential action remains a separate boundary.
 \n### 2026-10-03 — Candidate generation remains non-authoritative\n\n`CandidateSet` groups candidate hypotheses and interventions for a defined problem without ranking, selecting, authorizing, or executing them. Candidate generation must remain distinct from human decision and consequential action.\n\n### 2026-10-03 — Models remain bounded analysis artifacts\n\n`Model` records a calculation or simulation's purpose, method, inputs, assumptions, outputs, and uncertainty. It does not become evidence merely because it produces an output, and it does not authorize or execute an intervention.\n
+### 2026-10-03 — Candidate generation receives an explicit request boundary
+
+`CandidateRequest` records the defined problem, explicit evidence and gap references, requested candidate types, and generation constraints. It is not itself a candidate and carries no ranking, selection, authorization, or execution semantics. Candidate-generation machinery must consume an explicit request rather than relying on hidden inputs.
