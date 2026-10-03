@@ -60,6 +60,12 @@ It deliberately does not claim that the intervention works.
 
 `CandidateSet` now provides a minimal grouping boundary for generated hypotheses and/or interventions. It does not rank, select, authorize, or execute candidates.
 
+## Candidate-generation request boundary
+
+**Status:** first bounded candidate-generation request boundary established and tested; candidate-generation machinery is not yet implemented.
+
+The current `CandidateRequest` makes generation inputs explicit: problem identity, evidence and gap references, requested candidate types, and constraints. It deliberately does not generate, rank, select, authorize, or execute candidates.
+
 ## Model boundary
 
 **Status:** first bounded model boundary established and tested; model-execution machinery is not yet implemented.
