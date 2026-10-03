@@ -166,3 +166,7 @@ The objective is to remember **only what future work needs**.
 **2026-10-03 — Failure-analysis request boundary implemented**
 
 `FailureAnalysisRequest` now makes the attack inputs explicit: problem identity, intervention references, optional hypothesis/model references, focus areas, and constraints. It remains a non-authoritative request boundary; failure findings, risk judgments, ranking, authorization, and execution remain separate capabilities.
+
+**2026-10-03 — Failure-analysis result boundary implemented**
+
+`FailureAnalysis` now provides a bounded result artifact linking a failure-analysis request to explicit failure-mode identities while preserving uncertainty. It remains distinct from evidence, decisions, authorization, and execution.
