@@ -118,3 +118,7 @@ Praxis now represents a human decision as a distinct `Decision` object. It recor
 ### 2026-10-03 — Decision formulation receives an explicit request boundary
 
 `DecisionRequest` makes the subject and supporting inputs to decision formulation explicit while preserving the separate human `Decision` record. A request cannot itself become a decision or authorization.
+
+### 2026-10-03 — Candidate assembly is separate from candidate generation
+
+The first candidate-stage machinery validates and groups externally produced hypotheses/interventions under a `CandidateRequest`. Generation intelligence remains outside this assembly boundary, preventing grouping from becoming implicit ranking, selection, or authority.
