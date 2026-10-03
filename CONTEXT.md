@@ -17,6 +17,11 @@ Its purpose is to let the steward reconstruct the current project state from the
 
 ## Current state
 
+**2026-10-03 — Bounded model boundary implemented**
+
+`Model` now represents a bounded calculation or simulation as a distinct analysis artifact. It records purpose, method, inputs, assumptions, outputs, and uncertainty without executing a model, promoting outputs to evidence, or making decisions.
+
+
 **2026-10-03 — Candidate-set boundary implemented**
 
 `CandidateSet` now provides a minimal immutable grouping boundary for candidate hypotheses and/or interventions belonging to a defined problem. It requires at least one candidate and unique identities within each candidate type, while deliberately providing no ranking, selection, authorization, or execution semantics.
