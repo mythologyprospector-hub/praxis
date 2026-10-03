@@ -28,6 +28,8 @@ The Phase 1 substrate contains:
 
 The evidence/hypothesis/evaluation distinctions are represented and tested.
 
+`EvidenceGap` now provides the first explicit boundary for material unknowns that may affect later reasoning or testing.
+
 The current `Problem` object preserves:
 
 - goal;
