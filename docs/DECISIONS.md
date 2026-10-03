@@ -114,3 +114,7 @@ Praxis now represents a human decision as a distinct `Decision` object. It recor
 ### 2026-10-03 — Model construction receives an explicit request boundary
 
 `ModelRequest` separates a request to construct a bounded model from the resulting `Model`. It does not execute a model, create evidence, or make a decision.
+
+### 2026-10-03 — Decision formulation receives an explicit request boundary
+
+`DecisionRequest` makes the subject and supporting inputs to decision formulation explicit while preserving the separate human `Decision` record. A request cannot itself become a decision or authorization.
