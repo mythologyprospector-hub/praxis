@@ -48,6 +48,10 @@ A single evidence-bearing statement. It must retain provenance and an explicit d
 
 What is currently known for the problem, represented as explicit EvidenceItems. Adding an item requires a matching `EvidenceAdmission`, which records the authorization, rationale, problem, and evidence identity.
 
+### EvidenceGap
+
+A material unknown or unresolved uncertainty relevant to the problem. It is not evidence, an inference, or a hypothesis; it records what is missing and why that missing knowledge could matter to a decision.
+
 ### Hypothesis
 
 A proposed explanation or mechanism that could affect the problem. It is explicitly separate from EvidenceItem and does not become evidence merely by being represented.
