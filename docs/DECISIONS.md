@@ -57,3 +57,8 @@ Reasoning machinery should receive an immutable context pairing the defined Prob
 ### 2026-10-03 — Missing knowledge is a first-class reasoning input
 
 Praxis should represent material unknowns explicitly rather than forcing absence of evidence into evidence, inference, or hypothesis objects. `EvidenceGap` records the unknown and why it could matter to a decision; it does not assert what the answer is.
+
+
+### 2026-10-03 — Grounded reasoning context includes explicit gaps
+
+A reasoning input should preserve both what is currently supported by evidence and what remains materially unknown. `ReasoningContext` therefore carries matching `EvidenceState` plus zero or more `EvidenceGap` objects, rejecting cross-problem gaps just as it rejects cross-problem evidence.
