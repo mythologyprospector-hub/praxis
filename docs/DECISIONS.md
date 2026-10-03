@@ -17,3 +17,8 @@ Praxis must search for ways an intervention could fail or cause harm rather than
 ### 2026-10-02 — Build the substrate before the machinery
 
 The initial implementation should establish inspectable representations, provenance, tests, and boundaries before adding autonomous or consequential behavior.
+
+
+### 2026-10-03 — Evidence and hypothesis remain separate
+
+A hypothesis is represented as a proposal with explicit rationale and problem association. It is not an evidence object and does not gain evidentiary status merely by being generated or stored.
