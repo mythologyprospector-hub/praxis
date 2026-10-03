@@ -60,6 +60,12 @@ It deliberately does not claim that the intervention works.
 
 `CandidateSet` now provides a minimal grouping boundary for generated hypotheses and/or interventions. It does not rank, select, authorize, or execute candidates.
 
+## Model boundary
+
+**Status:** first bounded model boundary established and tested; model-execution machinery is not yet implemented.
+
+The current `Model` object records a model's purpose, method, inputs, assumptions, outputs, and uncertainty. It deliberately does not execute a simulation, claim that outputs are true, or make decisions.
+
 ## Phase 3 — Failure analysis
 
 Represent counterexamples, failure modes, harms, unintended consequences, assumptions, and boundary conditions.
