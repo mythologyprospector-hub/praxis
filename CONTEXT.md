@@ -206,3 +206,7 @@ The objective is to remember **only what future work needs**.
 **2026-10-03 — Decision-request boundary implemented**
 
 `DecisionRequest` now separates a request to formulate a consequential decision from the resulting human decision, with explicit subject and supporting artifact references.
+
+**2026-10-03 — First candidate-stage machinery implemented**
+
+`assemble_candidate_set(...)` now validates generated hypotheses/interventions against a `CandidateRequest` and constructs a bounded `CandidateSet`. It intentionally does not generate or select candidates.
