@@ -110,3 +110,7 @@ Praxis now represents a human decision as a distinct `Decision` object. It recor
 ### 2026-10-03 — Evaluation receives an explicit request boundary
 
 `EvaluationRequest` separates a request to assess a hypothesis from the resulting inference. Evidence remains input rather than becoming inference by reference.
+
+### 2026-10-03 — Model construction receives an explicit request boundary
+
+`ModelRequest` separates a request to construct a bounded model from the resulting `Model`. It does not execute a model, create evidence, or make a decision.
