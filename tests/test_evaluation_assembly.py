@@ -37,3 +37,17 @@ def test_assembly_rejects_supplied_hypothesis_from_wrong_problem():
     hypothesis=Hypothesis(id="h-1",problem_id="p-2",statement="h",rationale="r")
     with pytest.raises(ValueError, match="different problem"):
         assemble_evaluation(req,ev,hypothesis)
+
+
+def test_assembly_rejects_evaluation_target_mismatch_with_supplied_hypothesis():
+    req=EvaluationRequest(id="req-1",problem_id="p-1",hypothesis_id="h-1",evidence_ids=("e-1",))
+    ev=HypothesisEvaluation(id="ev-1",hypothesis_id="h-2",inference="i",uncertainty="u",evidence_ids=("e-1",))
+    hypothesis=Hypothesis(id="h-1",problem_id="p-1",statement="h",rationale="r")
+    with pytest.raises(ValueError, match="different hypothesis"):
+        assemble_evaluation(req,ev,hypothesis)
+
+def test_assembly_rejects_evidence_outside_request():
+    req=EvaluationRequest(id="req-1",problem_id="p-1",hypothesis_id="h-1",evidence_ids=("e-1",))
+    ev=HypothesisEvaluation(id="ev-1",hypothesis_id="h-1",inference="i",uncertainty="u",evidence_ids=("e-1","e-2"))
+    with pytest.raises(ValueError, match="outside the request"):
+        assemble_evaluation(req,ev)
