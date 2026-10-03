@@ -17,6 +17,14 @@ Its purpose is to let the steward reconstruct the current project state from the
 
 ## Current state
 
+**2026-10-03 — Phase 1 problem substrate started**
+
+The first executable Praxis domain object now exists in `praxis/problem.py`, with tests in `tests/test_problem.py`. It represents the human-defined problem fields required by the Phase 1 success criterion and provides deterministic JSON serialization.
+
+GitHub Actions has executed the new pytest suite; the test step completed successfully on commit `6a62320ecbf4875d313652ccd0492ce4769eec0b`.
+
+`docs/INTEGRATION.md` establishes the initial boundary with Organs: Praxis owns domain semantics; Organs owns runtime discovery, transport, and shared runtime mechanisms. No Organs dependency is introduced into the Phase 1 domain substrate yet.
+
 **2026-10-02 — Foundation established**
 
 Praxis was created as a public repository.
@@ -29,7 +37,7 @@ Initial durable artifacts:
 - `docs/DECISIONS.md` — initial decisions.
 - `README.md` — project orientation.
 
-The repository is intentionally not yet an implementation-heavy system.
+The repository is intentionally being built from the domain substrate outward rather than beginning with runtime machinery.
 
 ## Core conception
 
@@ -56,9 +64,9 @@ The current conceptual relationship is:
 - Episteme — understand.
 - Renaissance — connect.
 - Praxis — act through human-directed problem solving.
-- Organs — shared infrastructure where justified.
+- Organs — shared runtime infrastructure through explicit contracts.
 
-These are working boundaries, not permission to assume integrations before their contracts exist.
+These are working boundaries. Integration must be justified by an actual workflow and must preserve domain ownership and provenance.
 
 ## Open questions
 
@@ -66,7 +74,7 @@ No unresolved architectural question should be silently answered here. Record it
 
 ## Active hypotheses
 
-None yet beyond the initial architecture documented in `docs/ARCHITECTURE.md`.
+The Phase 1 `Problem` representation is intentionally small and domain-local. Future workflow objects should be added only when the next stage of the roadmap establishes a concrete need.
 
 ## Rejected / prohibited directions
 
