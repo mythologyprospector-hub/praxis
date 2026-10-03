@@ -149,3 +149,7 @@ An explicit linkage between an observed `Result`, its bounded `Test`, and any in
 ### TestRequest
 
 A bounded request to design a `Test` for explicit candidate interventions. It can carry hypotheses, failure modes, models, and constraints as inputs, but does not design, authorize, or execute the test.
+
+### ResultRequest
+
+A bounded request to capture observations from a completed `Test`. It identifies the test and optional expected observations/interventions but does not create evidence, make a decision, or execute anything.
