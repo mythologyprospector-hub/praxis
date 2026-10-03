@@ -24,6 +24,13 @@ class CandidateGenerationOutput:
     derivations: tuple[Derivation, ...] = ()
 
 
+@dataclass(frozen=True)
+class CandidateGenerationResult:
+    """Validated candidate set with the derivations that explain its generation."""
+
+    candidate_set: CandidateSet
+    derivations: tuple[Derivation, ...] = ()
+
 @runtime_checkable
 class CandidateGenerator(Protocol):
     """Provider boundary for generating unranked candidate artifacts."""
@@ -38,7 +45,7 @@ def generate_candidates(
     request: CandidateRequest,
     context: ReasoningContext,
     generator: CandidateGenerator,
-) -> CandidateSet:
+) -> CandidateGenerationResult:
     """Generate and validate candidates through an explicit provider boundary."""
     if not isinstance(request, CandidateRequest):
         raise TypeError("request must be a CandidateRequest")
@@ -63,8 +70,12 @@ def generate_candidates(
             derivation,
             tuple(candidate_ids) + tuple(request.gap_ids) + tuple(request.evidence_ids),
         )
-    return assemble_candidate_set(
+    candidate_set = assemble_candidate_set(
         request, hypotheses=output.hypotheses, interventions=output.interventions
+    )
+    return CandidateGenerationResult(
+        candidate_set=candidate_set,
+        derivations=output.derivations,
     )
 
 
