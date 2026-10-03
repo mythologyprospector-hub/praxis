@@ -49,3 +49,7 @@ A Result must not silently become evidence. The first closed-loop boundary uses 
 ### 2026-10-03 — Evidence-state admission requires a recorded authorization
 
 Adding evidence to an EvidenceState is an epistemic state change, so it must not be an implicit side effect of creating an EvidenceItem. The first gate is an EvidenceAdmission record containing the problem, evidence identity, authorizing human reference, and rationale. EvidenceState.admit(...) requires a matching admission and does not itself invent or infer authorization.
+
+### 2026-10-03 — Reasoning consumes an explicit grounded context
+
+Reasoning machinery should receive an immutable context pairing the defined Problem with its matching EvidenceState. The context is an input boundary only: it does not infer, rank, decide, or mutate evidence. A context cannot combine evidence belonging to another problem.
