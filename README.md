@@ -47,24 +47,52 @@ The loop is intentionally incomplete until evidence returns from the world. Resu
 
 ## Current status
 
-Phase 0 is established. Phase 1 is established with inspectable problem/evidence/epistemic boundaries. Phase 2 has begun with an explicit `Intervention` boundary, Phase 3 with an explicit `FailureMode` boundary, Phase 4 with an explicit `Test` boundary, and Phase 5 with an explicit `Result` boundary.
+The foundational domain substrate is established and tested through the major stages of the problem-solving loop.
 
-The current substrate distinguishes:
+Current domain objects include:
 
-- evidence-bearing statements, with provenance and uncertainty;
-- hypotheses, which are proposed explanations or mechanisms;
-- evaluations, which record inferences about hypotheses, their uncertainty, and the evidence considered;
-- interventions, which are proposed changes with intended outcomes;
-- failure modes, which are explicit analyses of how candidate interventions could fail or cause harm;
-- tests, which are bounded plans for learning about candidate interventions;
-- results, which record observations from performed tests with provenance and uncertainty.
+- **Problem** — a human-defined problem with goals, constraints, values, non-negotiables, stakeholders, risks, and tradeoffs.
+- **EvidenceItem / EvidenceState** — evidence-bearing statements with provenance and uncertainty, explicitly associated with a problem.
+- **EvidenceGap / ReasoningContext** — material unknowns and the grounded reasoning input that carries evidence and gaps together.
+- **Hypothesis / HypothesisEvaluation** — proposed explanations and explicit inferences about them, kept distinct from evidence.
+- **Intervention / CandidateSet** — proposed changes and bounded candidate groupings without automatic ranking, selection, authorization, or execution.
+- **FailureMode / FailureAnalysis** — explicit failure and harm analysis, with lineage back to the request and underlying failure modes.
+- **Model** — a bounded calculation/simulation artifact with purpose, inputs, assumptions, outputs, and uncertainty.
+- **Test** — a bounded learning plan with expected observations, safety constraints, reversibility, decision criteria, and lineage to supporting artifacts.
+- **Result** — an observed outcome from a test, with provenance, uncertainty, and deviations.
+- **Decision / DecisionScope** — a recorded human decision and its bounded relationship to a test or intervention.
+- **Derivation / ResultScope** — explicit traceability and experimental scope boundaries.
 
-The implementation currently has deterministic serialization and dedicated tests for these domain boundaries. Broader candidate-generation, failure-analysis, test-execution, and result-to-evidence machinery remains ahead on the roadmap.
+Explicit request boundaries are also established and tested for candidate generation, hypothesis evaluation, failure analysis, model construction, test design, result capture, evidence admission, and decision formulation.
+
+The corresponding assembly boundaries validate that produced artifacts belong to the requests and problems that claim them, including supplied artifact lineage where applicable. Result-derived evidence requires explicit source-result lineage and a separate human admission boundary.
+
+**What is not yet implemented:** general candidate-generation reasoning, general failure-analysis reasoning, model execution, test execution, automated real-world action, and the broader closed-loop workflow into Episteme. These remain separate future capabilities rather than implicit behavior of the current substrate.
 
 ## Integration
 
 See [docs/INTEGRATION.md](docs/INTEGRATION.md) for the current Organs boundary. Runtime integration is deliberately downstream of stable domain semantics.
 
+## Development
+
+The repository is intended to be understandable from its durable artifacts and tests. Before substantial work, inspect the canon, architecture, roadmap, decisions, and current repository state.
+
+Run the test suite with:
+
+```bash
+pytest
+```
+
+For the canonical development direction and current implementation status, see:
+
+- [CANON.md](CANON.md)
+- [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
+- [docs/ROADMAP.md](docs/ROADMAP.md)
+- [docs/DECISIONS.md](docs/DECISIONS.md)
+- [docs/CONTEXT.md](CONTEXT.md)
+
 ## Principles
 
-See [CANON.md](CANON.md).
+Praxis preserves human agency, epistemic discipline, explicit provenance, failure analysis, bounded experimentation, transparency, and separation between analysis and consequential authority.
+
+See [CANON.md](CANON.md) for the governing principles.
