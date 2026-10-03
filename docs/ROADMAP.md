@@ -60,6 +60,17 @@ It deliberately does not claim that the intervention works.
 
 Represent counterexamples, failure modes, harms, unintended consequences, assumptions, and boundary conditions.
 
+**Status:** first failure-mode boundary established and tested; broader failure-analysis machinery is not yet implemented.
+
+The current `FailureMode` object records:
+
+- the defined problem it belongs to;
+- a concrete description of how a candidate intervention could fail or cause harm;
+- severity and likelihood descriptors;
+- optional intervention references.
+
+It is deliberately an analysis object rather than evidence or an observed result.
+
 ## Phase 4 — Test design
 
 Represent bounded tests with explicit objectives, expected observations, safety constraints, reversibility, and decision criteria.
