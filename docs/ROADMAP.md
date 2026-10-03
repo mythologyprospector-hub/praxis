@@ -28,7 +28,7 @@ The Phase 1 substrate contains:
 
 The evidence/hypothesis/evaluation distinctions are represented and tested.
 
-`EvidenceGap` now provides the first explicit boundary for material unknowns that may affect later reasoning or testing.
+`EvidenceGap` now provides the first explicit boundary for material unknowns that may affect later reasoning or testing. `ReasoningContext` now carries those gaps alongside the matching evidence state, preserving both known evidence and material unknowns at the reasoning input boundary.
 
 The current `Problem` object preserves:
 
@@ -112,7 +112,7 @@ It is deliberately distinct from the test plan and is not automatically promoted
 
 Connect results back into the problem's evidence state and, where appropriate, to Episteme.
 
-**Status:** explicit Result-to-Evidence admission boundary established and tested; grounded reasoning context boundary now established and tested; broader closed-loop workflow is not yet implemented.
+**Status:** explicit Result-to-Evidence admission boundary established and tested; grounded reasoning context now includes both evidence and explicit gaps; broader closed-loop workflow is not yet implemented.
 
 A result-derived EvidenceItem must be created explicitly and retains the source Result identifier, provenance, and uncertainty. A Result is never silently promoted into evidence merely because it exists.
 
