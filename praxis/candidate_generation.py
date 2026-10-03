@@ -3,10 +3,10 @@ from __future__ import annotations
 
 from collections.abc import Iterable
 
-from .candidate import CandidateSet
-from .candidate_request import CandidateRequest
-from .hypothesis import Hypothesis
-from .intervention import Intervention
+from praxis.candidate import CandidateSet
+from praxis.candidate_request import CandidateRequest
+from praxis.hypothesis import Hypothesis
+from praxis.intervention import Intervention
 
 
 def assemble_candidate_set(
@@ -15,12 +15,7 @@ def assemble_candidate_set(
     hypotheses: Iterable[Hypothesis] = (),
     interventions: Iterable[Intervention] = (),
 ) -> CandidateSet:
-    """Assemble generated candidates under an explicit request.
-
-    This function does not generate, rank, select, authorize, or execute candidates.
-    Generation may be supplied by a future reasoning engine; this boundary only
-    validates and groups its proposed artifacts.
-    """
+    """Assemble generated candidates under an explicit request."""
     hypotheses = tuple(hypotheses)
     interventions = tuple(interventions)
 
@@ -34,12 +29,17 @@ def assemble_candidate_set(
             raise TypeError("hypotheses must contain Hypothesis objects")
         if item.problem_id != request.problem_id:
             raise ValueError("hypothesis belongs to a different problem")
+        if not set(item.evidence_ids).issubset(request.evidence_ids):
+            raise ValueError("hypothesis references evidence outside the request")
 
+    hypothesis_ids = {item.id for item in hypotheses}
     for item in interventions:
         if not isinstance(item, Intervention):
             raise TypeError("interventions must contain Intervention objects")
         if item.problem_id != request.problem_id:
             raise ValueError("intervention belongs to a different problem")
+        if not set(item.hypothesis_ids).issubset(hypothesis_ids):
+            raise ValueError("intervention references hypotheses outside the candidate set")
 
     if not hypotheses and not interventions:
         raise ValueError("candidate generation produced no candidates")
