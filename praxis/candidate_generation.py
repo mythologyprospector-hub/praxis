@@ -30,6 +30,8 @@ class CandidateGenerationResult:
 
     candidate_set: CandidateSet
     derivations: tuple[Derivation, ...] = ()
+    hypotheses: tuple[Hypothesis, ...] = ()
+    interventions: tuple[Intervention, ...] = ()
 
     @property
     def id(self) -> str:
@@ -98,6 +100,8 @@ def generate_candidates(
     return CandidateGenerationResult(
         candidate_set=candidate_set,
         derivations=output.derivations,
+        hypotheses=output.hypotheses,
+        interventions=output.interventions,
     )
 
 
