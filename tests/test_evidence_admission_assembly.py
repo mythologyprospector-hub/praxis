@@ -6,6 +6,7 @@ from praxis.admission import EvidenceAdmission
 from praxis.evidence import EvidenceItem
 from praxis.evidence_admission_assembly import assemble_evidence_admission
 from praxis.evidence_admission_request import EvidenceAdmissionRequest
+from praxis.result import Result
 
 
 def _request() -> EvidenceAdmissionRequest:
@@ -57,3 +58,18 @@ def test_wrong_admission_type_rejected() -> None:
 def test_wrong_evidence_type_rejected() -> None:
     with pytest.raises(TypeError, match="EvidenceItem"):
         assemble_evidence_admission(_request(), _admission(), object())  # type: ignore[arg-type]
+
+def _result() -> Result:
+    return Result(id="result-1", test_id="test-1", summary="Observed outcome.", observations=("outcome",), provenance="experiment-log", uncertainty="moderate")
+
+def test_matching_result_lineage_accepts_admission() -> None:
+    assert assemble_evidence_admission(_request(), _admission(), _item(source_result_id="result-1"), _result()) is _admission()
+
+def test_wrong_result_rejected() -> None:
+    result = Result(id="result-2", test_id="test-1", summary="Observed outcome.", observations=("outcome",), provenance="experiment-log", uncertainty="moderate")
+    with pytest.raises(ValueError, match="does not match"):
+        assemble_evidence_admission(_request(), _admission(), _item(source_result_id="result-2"), result)
+
+def test_missing_result_lineage_rejected() -> None:
+    with pytest.raises(ValueError, match="does not reference"):
+        assemble_evidence_admission(_request(), _admission(), _item(), _result())
