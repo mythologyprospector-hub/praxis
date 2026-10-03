@@ -12,6 +12,8 @@ def assemble_evaluation(
     hypothesis: Hypothesis | None = None,
 ) -> HypothesisEvaluation:
     """Validate an evaluation against its explicit request boundary."""
+    if not isinstance(request, EvaluationRequest):
+        raise TypeError("request must be an EvaluationRequest")
     if not isinstance(evaluation, HypothesisEvaluation):
         raise TypeError("evaluation must be a HypothesisEvaluation")
     if evaluation.id.strip() != evaluation.id:
