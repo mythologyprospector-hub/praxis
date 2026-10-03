@@ -226,6 +226,9 @@ def test_gap_directed_generator_respects_requested_candidate_types():
     assert hypotheses == ()
     assert len(interventions) == 1
     assert interventions[0].hypothesis_ids == ()
+    assert len(output.derivations) == 1
+    assert output.derivations[0].artifact_id == interventions[0].id
+    assert output.derivations[0].source_ids == ("g-1",)
 
 
 def test_gap_directed_generator_requires_requested_gap():
