@@ -21,13 +21,13 @@ Its purpose is to let the steward reconstruct the current project state from the
 
 `ReasoningContext` pairs a Problem with its matching EvidenceState and rejects cross-problem combinations. It is deliberately an input boundary for future reasoning machinery, not an inference, decision, or mutation mechanism.
 
-Local verification of the reasoning-context boundary was completed with 43 passing tests. The subsequent `EvidenceGap` boundary is awaiting local verification.
+Local verification of the earlier reasoning-context boundary completed with 43 passing tests. `EvidenceGap` was subsequently implemented and verified with 46 passing tests; `ReasoningContext` now carries both evidence and explicit gaps.
 
 **2026-10-03 — Phase 6 human-gated evidence admission boundary implemented**
 
 `EvidenceAdmission` now records explicit authorization for adding an EvidenceItem to an EvidenceState. `EvidenceState.admit(...)` requires matching problem and evidence identities and preserves the evidence object unchanged. Tests cover successful admission and cross-boundary rejection. The broader closed loop remains future work.
 
-Local verification of this latest commit is pending.
+Local verification completed in the current repository state; see the later verified entries.
 
 **2026-10-03 — Phase 6 result-to-evidence admission boundary implemented**
 
