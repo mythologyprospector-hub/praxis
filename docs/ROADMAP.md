@@ -24,7 +24,7 @@ The Phase 1 substrate now contains:
 - `EvidenceItem` — an evidence-bearing statement with provenance and uncertainty;
 - `EvidenceState` — evidence explicitly associated with a problem.
 
-The remaining Phase 1 work is to establish the distinction between evidence and hypotheses/proposals before moving into candidate generation.
+The evidence/hypothesis distinction is now represented and tested. The remaining Phase 1 work is to define how hypotheses can be evaluated without being promoted into evidence merely by system output.
 
 The current `Problem` object preserves:
 
