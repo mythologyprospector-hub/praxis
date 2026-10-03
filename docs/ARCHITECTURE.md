@@ -72,6 +72,10 @@ A bounded request for generating candidate hypotheses and/or interventions. It r
 
 A bounded collection of candidate hypotheses and/or interventions considered together for a defined problem. It provides grouping without ranking, selecting, authorizing, or executing a candidate. Candidate identity within each collection is unique, and at least one candidate is required.
 
+### FailureAnalysisRequest
+
+A bounded request to examine candidate interventions for failure modes and harm. It records the problem, explicit intervention references, optional hypothesis and model references, focus areas, and constraints. It is a request boundary only: it does not create findings, assign severity or likelihood, rank interventions, authorize action, or execute anything.
+
 ### Model
 
 A bounded calculation or simulation used to explore a defined problem. It records purpose, method, inputs, assumptions, outputs, and uncertainty. A Model is an analysis artifact, not evidence, a decision, or an executed intervention.
