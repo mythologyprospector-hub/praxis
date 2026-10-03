@@ -233,3 +233,14 @@ Candidate artifacts can now be validated and grouped under an explicit `Candidat
 **Status:** first bounded decision-request artifact lineage validation implemented and tested.
 
 `validate_decision_lineage(...)` verifies that the candidate sets, tests, results, and evidence explicitly referenced by a `DecisionRequest` are supplied and belong to the request's problem where applicable. It does not make, rank, authorize, or execute the decision.
+
+
+### Bounded workflow composition
+
+**Status:** the bounded pre-decision and post-decision stages are now composed and CI-verified.
+
+The reusable workflow coordinator sequences the established provider boundaries through the two explicit human gates:
+
+`Frame → Ground → Expose gaps → Generate → Evaluate → Attack → Model → Design test → Human Decision → Observe → ResultScope → Human Evidence Admission → EvidenceState`
+
+The composition validates stage lineage and delegates result capture and evidence admission to supplied/existing boundaries. It does not interpret the human decision, execute interventions, rank or select candidates, or grant evidence authority implicitly. Runtime integration and autonomous consequential behavior remain out of scope.
