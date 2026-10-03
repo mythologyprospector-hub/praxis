@@ -86,3 +86,7 @@ Praxis now represents a human decision as a distinct `Decision` object. It recor
 ### 2026-10-03 — Artifact derivation is explicit
 
 `Derivation` records how an artifact was produced from explicit source identities while preserving method and uncertainty. Lineage is not silently promoted to evidence or authority.
+
+### 2026-10-03 — Decision scope is explicit
+
+`DecisionScope` makes the subject of a human decision explicit by linking it to a bounded test or intervention. The linkage records scope; it does not execute or authorize beyond the recorded human decision.
