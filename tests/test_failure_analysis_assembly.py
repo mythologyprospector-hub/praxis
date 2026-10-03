@@ -48,12 +48,11 @@ def test_wrong_problem_rejected() -> None:
 
 
 def test_empty_findings_rejected() -> None:
-    analysis = FailureAnalysis(
-        id="analysis-1", request_id="request-1", problem_id="problem-1",
-        failure_mode_ids=(), uncertainty="bounded uncertainty"
-    )
     with pytest.raises(ValueError, match="failure mode"):
-        assemble_failure_analysis(_request(), analysis)
+        FailureAnalysis(
+            id="analysis-1", request_id="request-1", problem_id="problem-1",
+            failure_mode_ids=(), uncertainty="bounded uncertainty"
+        )
 
 
 def test_identity_must_differ() -> None:
