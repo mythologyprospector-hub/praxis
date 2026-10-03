@@ -182,3 +182,7 @@ The objective is to remember **only what future work needs**.
 **2026-10-03 — Result-scope boundary implemented**
 
 `ResultScope` explicitly links observed results to the bounded test and interventions they concern, preserving the distinction between observation, evidence, and decision.
+
+**2026-10-03 — Test-design request boundary implemented**
+
+`TestRequest` makes interventions and supporting hypotheses, failure modes, models, and constraints explicit inputs to test design without granting design or execution authority.
