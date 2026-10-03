@@ -160,7 +160,7 @@ A result-derived EvidenceItem must be created explicitly and retains the source 
 
 ## Phase 7 — Cross-domain reasoning
 
-Investigate carefully bounded use of Renaissance outputs.
+The first Praxis→Episteme handoff boundary is now established and tested as a translation packet. Direct Episteme integration, Episteme-side record creation, and broader cross-domain reasoning remain future work.
 
 ## Phase 8 — Real-world pilots
 
