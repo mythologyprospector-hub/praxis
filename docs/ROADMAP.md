@@ -47,7 +47,7 @@ It also has deterministic serialization suitable for later transport or persiste
 
 Represent candidate mechanisms and interventions without conflating proposals with evidence.
 
-**Status:** intervention and candidate-set boundaries established and verified by tests; candidate-generation machinery is not yet implemented.
+**Status:** intervention, candidate-set, and bounded candidate-generation machinery are established and verified by tests.
 
 The current `Intervention` object records:
 
@@ -62,9 +62,15 @@ It deliberately does not claim that the intervention works.
 
 ## Candidate-generation request boundary
 
-**Status:** first bounded candidate-generation request boundary established and tested; candidate-generation machinery is not yet implemented.
+**Status:** first bounded candidate-generation provider boundary established and tested; candidate generation preserves explicit derivation lineage.
 
 The current `CandidateRequest` makes generation inputs explicit: problem identity, evidence and gap references, requested candidate types, and constraints. It deliberately does not generate, rank, select, authorize, or execute candidates.
+
+### Hypothesis evaluation provider boundary
+
+**Status:** first bounded hypothesis-evaluation provider boundary established and tested.
+
+`evaluate_hypothesis(...)` validates the evaluation request, grounded reasoning context, matching hypothesis, provider output, evaluation lineage, and explicit derivation trace. It does not modify evidence or make decisions.
 
 ### Failure-analysis request boundary
 
