@@ -10,6 +10,8 @@ import json
 class Test:
     """A bounded method for learning about a candidate intervention."""
 
+    __test__ = False
+
     id: str
     problem_id: str
     objective: str
