@@ -194,3 +194,7 @@ The objective is to remember **only what future work needs**.
 **2026-10-03 — Evidence-admission request boundary implemented**
 
 `EvidenceAdmissionRequest` now explicitly separates requesting admission of result-derived evidence from the human authorization required by `EvidenceAdmission` and `EvidenceState.admit(...)`.
+
+**2026-10-03 — Evaluation request boundary implemented**
+
+`EvaluationRequest` now makes hypothesis/evidence/gap inputs to evaluation explicit while preserving the distinction between evidence, requested assessment, and resulting inference.
