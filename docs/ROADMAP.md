@@ -16,9 +16,9 @@ This is a research/build roadmap, not a promise of implementation.
 
 Create a minimal, inspectable representation for a defined problem.
 
-**Status:** evidence-state boundary and evaluation boundary implemented and verified by tests.
+**Status:** substrate established and verified by tests.
 
-The Phase 1 substrate now contains:
+The Phase 1 substrate contains:
 
 - `Problem` — the human-defined problem;
 - `EvidenceItem` — an evidence-bearing statement with provenance and uncertainty;
@@ -43,7 +43,18 @@ It also has deterministic serialization suitable for later transport or persiste
 
 ## Phase 2 — Candidate generation
 
-Represent hypotheses, mechanisms, and candidate interventions without conflating proposals with evidence.
+Represent candidate mechanisms and interventions without conflating proposals with evidence.
+
+**Status:** intervention boundary established and verified by tests; candidate-generation machinery is not yet implemented.
+
+The current `Intervention` object records:
+
+- the defined problem it belongs to;
+- the proposed change;
+- the intended outcome;
+- optional hypothesis references.
+
+It deliberately does not claim that the intervention works.
 
 ## Phase 3 — Failure analysis
 
