@@ -64,6 +64,10 @@ An assessment of a hypothesis against explicitly referenced evidence. It records
 
 A proposed change intended to alter an outcome for a defined problem. It may identify the hypotheses it is intended to act upon, but remains a proposal rather than evidence or a result.
 
+### CandidateRequest
+
+A bounded request for generating candidate hypotheses and/or interventions. It records the problem, explicit evidence and gap references, requested candidate types, and generation constraints. It is a request boundary only: it does not generate, rank, select, authorize, or execute candidates.
+
 ### CandidateSet
 
 A bounded collection of candidate hypotheses and/or interventions considered together for a defined problem. It provides grouping without ranking, selecting, authorizing, or executing a candidate. Candidate identity within each collection is unique, and at least one candidate is required.
