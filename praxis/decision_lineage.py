@@ -53,7 +53,11 @@ def validate_decision_lineage(
         raise ValueError("decision request references results outside supplied lineage")
     if not set(request.evidence_ids).issubset({item.id for item in supplied_evidence}):
         raise ValueError("decision request references evidence outside supplied lineage")
-    supplied_results_by_id = {item.id: item for item in supplied_results}
+    request_test_ids = set(request.test_ids)
+    requested_result_ids = set(request.result_ids)
+    for result in supplied_results:
+        if result.id in requested_result_ids and result.test_id not in request_test_ids:
+            raise ValueError("requested result references a test outside the decision request")
     for item in supplied_evidence:
-        if item.source_result_id is not None and item.source_result_id not in supplied_results_by_id:
-            raise ValueError("evidence references a result outside supplied lineage")
+        if item.id in set(request.evidence_ids) and item.source_result_id is not None and item.source_result_id not in requested_result_ids:
+            raise ValueError("requested evidence references a result outside the decision request")
