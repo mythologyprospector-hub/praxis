@@ -210,3 +210,10 @@ The objective is to remember **only what future work needs**.
 **2026-10-03 — First candidate-stage machinery implemented**
 
 `assemble_candidate_set(...)` now validates generated hypotheses/interventions against a `CandidateRequest` and constructs a bounded `CandidateSet`. It intentionally does not generate or select candidates.
+
+
+**2026-10-03 — Bounded workflow composition completed and CI-verified**
+
+The bounded workflow now composes the post-decision half through `complete_workflow(...)`: explicit human `Decision` → `ResultRequest`/observed `Result` → `ResultScope` → `EvidenceAdmissionRequest` → explicit human `EvidenceAdmission` → `EvidenceState`. The coordinator validates supplied lineage and delegates observation/admission to existing boundaries; it does not interpret decisions, execute interventions, or self-authorize evidence admission.
+
+Commits `c5f7cec427f67c1e7c0bd07bcba17bbdefe8e218` and `7f9271db107d9791c75f43826d5d1e66fde8919a` implement and test the composition. GitHub Actions passed for both changes. The earlier candidate-generation fixture repair is also CI-green at `55a191247e38cf3560ed8a99deedb56d2d296ed7`.
