@@ -167,3 +167,9 @@ Every phase requires explicit review before the next consequential capability is
 **Status:** first explicit decision-scope boundary established and tested.
 
 `DecisionScope` links a human `Decision` to a defined problem and at least one bounded test or intervention. It does not execute the decision or create autonomous authority.
+
+### Result-scope boundary
+
+**Status:** first explicit result-scope boundary established and tested.
+
+`ResultScope` links an observed `Result` to its bounded test and optional intervention identities. It preserves experimental scope without promoting results to evidence or decisions.
