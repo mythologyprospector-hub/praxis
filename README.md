@@ -43,7 +43,7 @@ evidence
 Episteme
 ```
 
-The loop is intentionally incomplete until evidence returns from the world. Result-to-evidence admission is explicit and traceable; observed results are not silently promoted into the evidence state.
+The bounded loop now reaches the explicit human decision gate, records observed results, and returns them to the evidence state only through explicit human evidence admission. Result-to-evidence admission is traceable; observed results are never silently promoted.
 
 ## Current status
 
@@ -67,7 +67,7 @@ Explicit request boundaries are also established and tested for candidate genera
 
 The corresponding assembly boundaries validate that produced artifacts belong to the requests and problems that claim them, including supplied artifact lineage where applicable. Result-derived evidence requires explicit source-result lineage and a separate human admission boundary.
 
-**What is not yet implemented:** general candidate-generation reasoning, general failure-analysis reasoning, model execution, test execution, automated real-world action, and the broader closed-loop workflow into Episteme. These remain separate future capabilities rather than implicit behavior of the current substrate.
+**What is not yet implemented:** general candidate-generation reasoning, general failure-analysis reasoning, model execution, test execution, automated real-world action, and the broader cross-domain handoff into Episteme. The bounded domain workflow itself is now composed and tested; these capabilities remain separate future work rather than implicit behavior of the current substrate.
 
 ## Integration
 
