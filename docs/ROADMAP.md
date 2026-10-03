@@ -110,6 +110,10 @@ It is deliberately distinct from the test plan and is not automatically promoted
 
 Connect results back into the problem's evidence state and, where appropriate, to Episteme.
 
+**Status:** explicit Result-to-Evidence admission boundary established and tested; broader closed-loop workflow is not yet implemented.
+
+A result-derived EvidenceItem must be created explicitly and retains the source Result identifier, provenance, and uncertainty. A Result is never silently promoted into evidence merely because it exists.
+
 ## Phase 7 — Cross-domain reasoning
 
 Investigate carefully bounded use of Renaissance outputs.
