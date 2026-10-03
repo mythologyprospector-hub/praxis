@@ -92,7 +92,7 @@ def test_prepare_workflow_rejects_evaluation_outside_generated_candidates():
         problem_id="p-1",
         candidate_request=CandidateRequest(
             id="c-1", problem_id="p-1", gap_ids=("g-1",),
-            requested_types=("intervention",)
+            requested_types=("hypothesis", "intervention")
         ),
         evaluation_requests=(
             EvaluationRequest(
