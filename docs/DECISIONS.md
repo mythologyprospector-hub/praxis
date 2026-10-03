@@ -106,3 +106,7 @@ Praxis now represents a human decision as a distinct `Decision` object. It recor
 ### 2026-10-03 — Evidence admission has an explicit request boundary
 
 `EvidenceAdmissionRequest` separates a request for human authorization from the authorization record itself. This preserves the human gate and prevents a request from becoming authority by implication.
+
+### 2026-10-03 — Evaluation receives an explicit request boundary
+
+`EvaluationRequest` separates a request to assess a hypothesis from the resulting inference. Evidence remains input rather than becoming inference by reference.
