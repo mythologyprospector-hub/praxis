@@ -39,7 +39,7 @@ def test_wrong_result_rejected() -> None:
 def test_wrong_test_rejected() -> None:
     scope = ResultScope(id="scope-1", result_id="result-1", problem_id="problem-1", test_id="test-2", intervention_ids=("intervention-1",))
     with pytest.raises(ValueError, match="test"):
-        assemble_result_scope(scope, _result())
+        assemble_result_scope(scope, _result(), _test())
 
 
 def test_wrong_scope_type_rejected() -> None:
