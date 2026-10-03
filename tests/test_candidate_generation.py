@@ -198,12 +198,13 @@ def test_gap_directed_generator_creates_unranked_gap_candidates():
         evidence_ids=("e-1",),
         gap_ids=("g-1",),
     )
-    hypotheses, interventions = GapDirectedCandidateGenerator().generate(
-        request, _context()
-    )
+    output = GapDirectedCandidateGenerator().generate(request, _context())
+    hypotheses = output.hypotheses
+    interventions = output.interventions
 
     assert len(hypotheses) == 1
     assert len(interventions) == 1
+    assert len(output.derivations) == 2
     assert hypotheses[0].evidence_ids == ()
     assert interventions[0].hypothesis_ids == (hypotheses[0].id,)
     assert "not evidence" in hypotheses[0].rationale
@@ -218,9 +219,9 @@ def test_gap_directed_generator_respects_requested_candidate_types():
         gap_ids=("g-1",),
         requested_types=("intervention",),
     )
-    hypotheses, interventions = GapDirectedCandidateGenerator().generate(
-        request, _context()
-    )
+    output = GapDirectedCandidateGenerator().generate(request, _context())
+    hypotheses = output.hypotheses
+    interventions = output.interventions
 
     assert hypotheses == ()
     assert len(interventions) == 1
