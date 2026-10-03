@@ -145,3 +145,7 @@ An explicit linkage between a recorded human `Decision` and the bounded test or 
 ### ResultScope
 
 An explicit linkage between an observed `Result`, its bounded `Test`, and any interventions under test. It clarifies what was actually tested without turning the result into evidence or a decision.
+
+### TestRequest
+
+A bounded request to design a `Test` for explicit candidate interventions. It can carry hypotheses, failure modes, models, and constraints as inputs, but does not design, authorize, or execute the test.
