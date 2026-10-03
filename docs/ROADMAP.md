@@ -203,3 +203,9 @@ Every phase requires explicit review before the next consequential capability is
 **Status:** first bounded model-request boundary established and tested.
 
 `ModelRequest` makes the purpose and supporting inputs to model construction explicit. Model construction/execution machinery remains unimplemented, and model outputs do not become evidence automatically.
+
+### Decision request boundary
+
+**Status:** first bounded decision-request boundary established and tested.
+
+`DecisionRequest` separates a request for decision formulation from the resulting human `Decision`. The request may carry candidate, test, result, evidence, and constraint references, but it has no decision or execution authority.
