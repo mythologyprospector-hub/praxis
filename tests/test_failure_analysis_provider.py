@@ -61,7 +61,7 @@ class _Analyzer:
 
 def _inputs():
     intervention = Intervention(
-        id="i-1", problem_id="p-1", proposal="change", intended_outcome="learn"
+        id="i-1", problem_id="p-1", description="change", intended_outcome="learn"
     )
     hypothesis = Hypothesis(
         id="h-1", problem_id="p-1", statement="h", rationale="r"
