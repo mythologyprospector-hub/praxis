@@ -72,3 +72,22 @@ def test_reasoning_context_rejects_gap_for_another_problem() -> None:
 
     with pytest.raises(ValueError, match="problem_id"):
         ReasoningContext(problem=problem, evidence=evidence, gaps=(gap,))
+
+def test_reasoning_context_requires_typed_unique_gaps() -> None:
+    problem = Problem(id="p1", title="Problem", goal="Learn.")
+    evidence = EvidenceState(problem_id="p1")
+    gap = EvidenceGap(
+        id="g1",
+        problem_id="p1",
+        description="A material unknown.",
+        decision_relevance="Relevant.",
+    )
+
+    with pytest.raises(TypeError, match="tuple"):
+        ReasoningContext(problem=problem, evidence=evidence, gaps=[gap])
+
+    with pytest.raises(TypeError, match="EvidenceGap"):
+        ReasoningContext(problem=problem, evidence=evidence, gaps=("not a gap",))
+
+    with pytest.raises(ValueError, match="unique"):
+        ReasoningContext(problem=problem, evidence=evidence, gaps=(gap, gap))
