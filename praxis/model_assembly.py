@@ -14,6 +14,8 @@ def assemble_model(
     intervention: Intervention | None = None,
 ) -> Model:
     """Validate a model against its explicit construction request."""
+    if not isinstance(request, ModelRequest):
+        raise TypeError("request must be a ModelRequest")
     if not isinstance(model, Model):
         raise TypeError("model must be a Model")
     if model.id == request.id:
