@@ -15,7 +15,6 @@ from praxis.hypothesis import Hypothesis
 from praxis.intervention import Intervention
 
 
-@runtime_checkable
 @dataclass(frozen=True)
 class CandidateGenerationOutput:
     """Generated candidates plus explicit derivations for each artifact."""
