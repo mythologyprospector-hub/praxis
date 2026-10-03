@@ -93,6 +93,19 @@ It is deliberately a plan for learning rather than an observed result.
 
 Capture actual observations and preserve their provenance.
 
+**Status:** first observed-result boundary established and tested; result-to-evidence workflow is not yet implemented.
+
+The current `Result` object records:
+
+- the test it belongs to;
+- an observed summary;
+- observations;
+- provenance;
+- uncertainty;
+- optional deviations from the test plan.
+
+It is deliberately distinct from the test plan and is not automatically promoted into the evidence state.
+
 ## Phase 6 — Closed loop
 
 Connect results back into the problem's evidence state and, where appropriate, to Episteme.
