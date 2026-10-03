@@ -47,13 +47,14 @@ The loop is intentionally incomplete until evidence returns from the world.
 
 ## Current status
 
-Phase 0 is established. Phase 1 now has an inspectable problem/evidence substrate and an explicit evaluation boundary, all covered by tests.
+Phase 0 is established. Phase 1 is established with inspectable problem/evidence/epistemic boundaries. Phase 2 has begun with an explicit `Intervention` boundary.
 
-The Phase 1 epistemic boundary distinguishes:
+The current substrate distinguishes:
 
 - evidence-bearing statements, with provenance and uncertainty;
 - hypotheses, which are proposed explanations or mechanisms;
-- evaluations, which record inferences about hypotheses, their uncertainty, and the evidence considered.
+- evaluations, which record inferences about hypotheses, their uncertainty, and the evidence considered;
+- interventions, which are proposed changes with intended outcomes.
 
 The implementation currently has deterministic serialization and a locally verified pytest suite.
 
