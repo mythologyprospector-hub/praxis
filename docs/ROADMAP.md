@@ -150,7 +150,7 @@ Connect results back into the problem's evidence state and, where appropriate, t
 
 A result-derived EvidenceItem must be created explicitly and retains the source Result identifier, provenance, and uncertainty. A Result is never silently promoted into evidence merely because it exists.
 
-`EvidenceAdmission` is the first human-gating boundary: it records who authorized admission, the rationale, and the exact problem/evidence identities. `EvidenceState.admit(...)` requires that authorization and refuses cross-problem or mismatched-evidence admission.
+`Result → EvidenceItem` derivation is now an explicit, tested boundary: a result-derived evidence item must carry the exact source Result identifier. `EvidenceAdmission` is the human-gating boundary: it records who authorized admission, the rationale, and the exact problem/evidence identities. `EvidenceState.admit(...)` requires that authorization and refuses cross-problem or mismatched-evidence admission.
 
 ## Phase 7 — Cross-domain reasoning
 
@@ -209,6 +209,12 @@ Every phase requires explicit review before the next consequential capability is
 **Status:** first bounded decision-request boundary established and tested.
 
 `DecisionRequest` separates a request for decision formulation from the resulting human `Decision`. The request may carry candidate, test, result, evidence, and constraint references, but it has no decision or execution authority.
+
+### Result-to-evidence assembly
+
+**Status:** first bounded result-to-evidence assembly implemented and tested.
+
+`assemble_result_evidence(...)` validates that an `EvidenceItem` explicitly references the supplied `Result`, preserving provenance lineage before human admission.
 
 ### Candidate assembly machinery
 
