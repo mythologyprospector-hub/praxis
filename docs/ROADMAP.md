@@ -74,9 +74,9 @@ The current `CandidateRequest` makes generation inputs explicit: problem identit
 
 ### Failure-analysis result boundary
 
-**Status:** first bounded failure-analysis result boundary established and tested; broader failure-analysis machinery is not yet implemented.
+**Status:** first bounded failure-analysis result boundary established and tested; failure-analysis lineage assembly is implemented and tested; broader failure-analysis machinery is not yet implemented.
 
-`FailureAnalysis` links a request to explicit failure-mode identities and preserves uncertainty. It does not authorize, rank, execute, or convert findings into evidence automatically.
+`FailureAnalysis` links a request to explicit failure-mode identities and preserves uncertainty. Its assembly boundary now validates the supplied `FailureMode` objects, their problem identity, and their intervention references against the originating request. It does not authorize, rank, execute, or convert findings into evidence automatically.
 
 ### Derivation boundary
 
