@@ -190,3 +190,12 @@ A bounded request to formulate a decision for human consideration. It makes the 
 The bounded provider stages are intended to compose into a reusable problem-solving workflow without collapsing their semantic boundaries. Composition may sequence Frame → Ground → Expose gaps → Generate → Evaluate → Attack → Model → Design test → Gate → Observe → Learn, while preserving each request, artifact, derivation, and human-gating transition as an explicit boundary.
 
 A workflow coordinator must orchestrate supplied providers and validate stage-to-stage lineage; it must not contain hidden reasoning, rank or select candidates, authorize consequential action, execute real-world interventions, or silently admit results as evidence. The human decision and evidence-admission gates remain explicit transitions in the composed workflow.
+
+
+### Completed bounded workflow composition
+
+The provider-stage composition now reaches the two explicit human gates without collapsing them. The post-decision half is:
+
+`Decision → ResultRequest/Result → ResultScope → EvidenceAdmissionRequest → EvidenceAdmission → EvidenceState`
+
+The coordinator may validate lineage and sequence supplied providers. It must not interpret a human decision as an execution instruction, treat an observed result as evidence without admission, or derive authority from a request. `EvidenceState.admit(...)` remains the actual admission boundary. This composition is test-covered and CI-verified; runtime integration remains downstream.
