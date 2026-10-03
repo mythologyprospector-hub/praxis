@@ -82,3 +82,8 @@ def test_assembly_rejects_wrong_intervention_type():
     request = CandidateRequest(id="req-1", problem_id="p-1")
     with pytest.raises(TypeError, match="Intervention"):
         assemble_candidate_set(request, interventions=(object(),))  # type: ignore[arg-type]
+
+
+def test_assembly_rejects_wrong_request_type():
+    with pytest.raises(TypeError, match="CandidateRequest"):
+        assemble_candidate_set(object())  # type: ignore[arg-type]
