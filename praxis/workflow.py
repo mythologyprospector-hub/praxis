@@ -6,22 +6,16 @@ rank, select, authorize, execute, or admit evidence.
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Callable
 
 from praxis.candidate_generation import CandidateGenerationResult, CandidateGenerator, generate_candidates
+from praxis.candidate_request import CandidateRequest
 from praxis.context import ReasoningContext
-from praxis.evaluation import HypothesisEvaluation
-from praxis.evaluation_provider import HypothesisEvaluator, EvaluationOutput, evaluate_hypothesis
+from praxis.evaluation_provider import EvaluationOutput, HypothesisEvaluator, evaluate_hypothesis
 from praxis.evaluation_request import EvaluationRequest
-from praxis.failure_analysis import FailureAnalysis
 from praxis.failure_analysis_provider import FailureAnalysisOutput, FailureAnalyzer, analyze_failures
 from praxis.failure_request import FailureAnalysisRequest
-from praxis.hypothesis import Hypothesis
-from praxis.model import Model
 from praxis.model_provider import ModelBuilder, ModelOutput, build_model
 from praxis.model_request import ModelRequest
-from praxis.problem import Problem
-from praxis.test import Test
 from praxis.test_provider import TestDesignOutput, TestDesigner, design_test
 from praxis.test_request import TestRequest
 
@@ -32,7 +26,7 @@ class WorkflowRequest:
 
     id: str
     problem_id: str
-    candidate_request: object
+    candidate_request: CandidateRequest
     evaluation_requests: tuple[EvaluationRequest, ...] = ()
     failure_request: FailureAnalysisRequest | None = None
     model_request: ModelRequest | None = None
@@ -43,6 +37,10 @@ class WorkflowRequest:
             raise ValueError("id must be a non-empty string")
         if not isinstance(self.problem_id, str) or not self.problem_id.strip():
             raise ValueError("problem_id must be a non-empty string")
+        if not isinstance(self.candidate_request, CandidateRequest):
+            raise TypeError("candidate_request must be a CandidateRequest")
+        if self.candidate_request.problem_id != self.problem_id:
+            raise ValueError("candidate request belongs to a different problem")
         if not isinstance(self.evaluation_requests, tuple):
             raise TypeError("evaluation_requests must be a tuple")
         if any(not isinstance(item, EvaluationRequest) for item in self.evaluation_requests):
@@ -88,12 +86,14 @@ def prepare_workflow(
         raise TypeError("context must be a ReasoningContext")
     if context.problem.id != request.problem_id:
         raise ValueError("context belongs to a different problem")
-    if request.candidate_request.problem_id != request.problem_id:
-        raise ValueError("candidate request belongs to a different problem")
 
     candidates = generate_candidates(request.candidate_request, context, generator)
-    hypotheses = _by_id(candidates, Hypothesis, candidates.candidate_set.hypothesis_ids)
-    interventions = _by_id(candidates, __import__("praxis.intervention", fromlist=["Intervention"]).Intervention, candidates.candidate_set.intervention_ids)
+    hypotheses = {item.id: item for item in candidates.hypotheses}
+    interventions = {item.id: item for item in candidates.interventions}
+
+    for evaluation_request in request.evaluation_requests:
+        if evaluation_request.hypothesis_id not in hypotheses:
+            raise ValueError("evaluation request references a hypothesis outside generated candidates")
 
     evaluations = tuple(
         evaluate_hypothesis(
@@ -105,25 +105,30 @@ def prepare_workflow(
         for evaluation_request in request.evaluation_requests
     )
 
-    if request.failure_request is None:
-        failure_analysis = None
-    else:
+    failure_analysis = None
+    if request.failure_request is not None:
         if failure_analyzer is None:
             raise ValueError("failure_analyzer is required by failure_request")
+        if not set(request.failure_request.intervention_ids).issubset(interventions):
+            raise ValueError("failure request references interventions outside generated candidates")
+        if not set(request.failure_request.hypothesis_ids).issubset(hypotheses):
+            raise ValueError("failure request references hypotheses outside generated candidates")
         failure_analysis = analyze_failures(
             request.failure_request,
             context,
             tuple(interventions.values()),
             failure_analyzer,
             hypotheses=tuple(hypotheses.values()),
-            models=(),
         )
 
-    if request.model_request is None:
-        model = None
-    else:
+    model = None
+    if request.model_request is not None:
         if model_builder is None:
             raise ValueError("model_builder is required by model_request")
+        if not set(request.model_request.hypothesis_ids).issubset(hypotheses):
+            raise ValueError("model request references hypotheses outside generated candidates")
+        if not set(request.model_request.intervention_ids).issubset(interventions):
+            raise ValueError("model request references interventions outside generated candidates")
         model = build_model(
             request.model_request,
             model_builder,
@@ -131,11 +136,14 @@ def prepare_workflow(
             interventions=tuple(interventions.values()),
         )
 
-    if request.test_request is None:
-        test = None
-    else:
+    test = None
+    if request.test_request is not None:
         if test_designer is None:
             raise ValueError("test_designer is required by test_request")
+        if not set(request.test_request.intervention_ids).issubset(interventions):
+            raise ValueError("test request references interventions outside generated candidates")
+        if not set(request.test_request.hypothesis_ids).issubset(hypotheses):
+            raise ValueError("test request references hypotheses outside generated candidates")
         failure_modes = () if failure_analysis is None else failure_analysis.failure_modes
         models = () if model is None else (model.model,)
         test = design_test(
@@ -155,12 +163,3 @@ def prepare_workflow(
         model=model,
         test=test,
     )
-
-
-def _by_id(source: CandidateGenerationResult, expected_type: type, ids: tuple[str, ...]) -> dict[str, object]:
-    items = []
-    if expected_type is Hypothesis:
-        items = [item for item_id in ids for item in source._hypotheses if item.id == item_id] if hasattr(source, "_hypotheses") else []
-    if not items:
-        raise ValueError("candidate result does not expose requested candidate objects")
-    return {item.id: item for item in items}
