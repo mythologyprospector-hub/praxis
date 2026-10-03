@@ -76,3 +76,9 @@ def test_assembly_rejects_id_collision_across_candidate_types():
         assemble_candidate_set(
             request, hypotheses=(hypothesis,), interventions=(intervention,)
         )
+
+
+def test_assembly_rejects_wrong_intervention_type():
+    request = CandidateRequest(id="req-1", problem_id="p-1")
+    with pytest.raises(TypeError, match="Intervention"):
+        assemble_candidate_set(request, interventions=(object(),))  # type: ignore[arg-type]
