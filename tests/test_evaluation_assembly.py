@@ -1,6 +1,7 @@
 from praxis.evaluation import HypothesisEvaluation
 from praxis.evaluation_request import EvaluationRequest
 from praxis.evaluation_assembly import assemble_evaluation
+from praxis.hypothesis import Hypothesis
 import pytest
 
 def test_assembly_accepts_evaluation_matching_request():
