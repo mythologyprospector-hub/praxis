@@ -93,6 +93,8 @@ It is deliberately a plan for learning rather than an observed result.
 
 ## Phase 5 — Result capture
 
+The current `Decision` boundary records a human decision, rationale, decision-maker reference, and optional subject identity. Recording a decision does not execute it.
+
 Capture actual observations and preserve their provenance.
 
 **Status:** first observed-result boundary established and tested; result-to-evidence workflow is not yet implemented.
