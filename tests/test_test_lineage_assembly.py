@@ -38,15 +38,15 @@ def test_assembly_accepts_complete_lineage() -> None:
 
 
 @pytest.mark.parametrize(
-    ("field", "expected"),
+    ("field", "supplied"),
     [
-        ("intervention_ids", ("intervention-1", "intervention-2")),
-        ("hypothesis_ids", ("hypothesis-1", "hypothesis-2")),
-        ("failure_mode_ids", ("failure-1", "failure-2")),
-        ("model_ids", ("model-1", "model-2")),
+        ("intervention_ids", ("intervention-2",)),
+        ("hypothesis_ids", ("hypothesis-2",)),
+        ("failure_mode_ids", ("failure-2",)),
+        ("model_ids", ("model-2",)),
     ],
 )
-def test_assembly_rejects_missing_lineage(field: str, expected: tuple[str, ...]) -> None:
+def test_assembly_rejects_missing_lineage(field: str, supplied: tuple[str, ...]) -> None:
     request = TestRequest(
         id="request-1",
         problem_id="problem-1",
@@ -56,7 +56,7 @@ def test_assembly_rejects_missing_lineage(field: str, expected: tuple[str, ...])
         model_ids=("model-1",),
     )
     with pytest.raises(ValueError):
-        assemble_test(request, _test(**{field: expected}))
+        assemble_test(request, _test(**{field: supplied}))
 
 
 def test_assembly_rejects_wrong_problem() -> None:
