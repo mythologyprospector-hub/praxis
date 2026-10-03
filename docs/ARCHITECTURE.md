@@ -36,9 +36,13 @@ What someone is trying to solve.
 
 A problem is not complete merely because it has a title. It should carry the goal, constraints, values, non-negotiables, stakeholders, risks, and tradeoffs that materially define the problem.
 
+### EvidenceItem
+
+A single evidence-bearing statement. It must retain provenance and an explicit description of uncertainty.
+
 ### EvidenceState
 
-What is currently known for the problem, with provenance and uncertainty.
+What is currently known for the problem, represented as explicit EvidenceItems.
 
 ### Hypothesis
 
