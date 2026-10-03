@@ -78,3 +78,7 @@ Praxis now represents a human decision as a distinct `Decision` object. It recor
 ### 2026-10-03 — Failure analysis receives an explicit request boundary
 
 `FailureAnalysisRequest` makes the interventions and supporting context to be attacked explicit. The request carries no failure finding, severity judgment, ranking, authorization, or execution semantics; those remain separate capabilities.
+
+### 2026-10-03 — Failure-analysis findings remain bounded analysis artifacts
+
+`FailureAnalysis` records the relationship between a failure-analysis request and identified failure modes while preserving uncertainty. Findings remain distinct from evidence, decisions, authorization, and execution.
