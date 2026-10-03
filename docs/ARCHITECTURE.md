@@ -66,7 +66,7 @@ A bounded method for learning about a candidate intervention. A Test defines an 
 
 ### Result
 
-What happened when a test was actually performed.
+What was observed when a bounded test was performed. A Result records the observed summary, observations, provenance, uncertainty, and any declared deviations from the test plan. It is distinct from the Test plan and from the evidence state until deliberately incorporated through a later workflow.
 
 ### Decision
 
