@@ -165,3 +165,7 @@ A bounded request to evaluate a specific `Hypothesis` against explicit evidence,
 ### ModelRequest
 
 A bounded request to construct a `Model` for a defined purpose. It makes relevant inputs, hypotheses, interventions, and constraints explicit without itself producing model outputs or decisions.
+
+### DecisionRequest
+
+A bounded request to formulate a decision for human consideration. It makes the decision subject and supporting candidates, tests, results, evidence, and constraints explicit. It does not itself decide, authorize, or execute anything.
