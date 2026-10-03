@@ -173,3 +173,7 @@ A bounded request to formulate a decision for human consideration. It makes the 
 ### Candidate generation assembly
 
 `assemble_candidate_set(...)` is the first bounded candidate-stage machinery. It accepts a `CandidateRequest` plus already-generated `Hypothesis` and `Intervention` objects, validates problem identity and requested types, and groups them into a `CandidateSet`. It deliberately does not contain generation intelligence, ranking, selection, authorization, or execution.
+
+### Decision lineage assembly
+
+`validate_decision_lineage(...)` is the bounded lineage gate beneath `DecisionRequest`. It verifies that referenced candidate sets, tests, results, and evidence are supplied; that candidate sets and tests belong to the request's problem; that results point to supplied tests; and that result-derived evidence points to a requested result. It preserves the distinction between preparing a decision for human consideration and actually making or executing that decision.
