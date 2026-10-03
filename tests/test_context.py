@@ -26,7 +26,9 @@ def test_reasoning_context_joins_matching_problem_and_evidence() -> None:
     context = ReasoningContext(problem=problem, evidence=evidence)
 
     assert context.to_dict() == {"problem": problem.to_dict(), "evidence": evidence.to_dict()}
-    assert json.loads(context.to_json()) == context.to_dict()
+    assert context.to_json() == json.dumps(
+        context.to_dict(), sort_keys=True, separators=(",", ":")
+    )
 
 
 def test_reasoning_context_rejects_evidence_for_another_problem() -> None:
