@@ -15,6 +15,8 @@ def assemble_evidence_admission(
     result: Result | None = None,
 ) -> EvidenceAdmission:
     """Validate an explicit authorization against its admission request and item."""
+    if not isinstance(request, EvidenceAdmissionRequest):
+        raise TypeError("request must be an EvidenceAdmissionRequest")
     if not isinstance(admission, EvidenceAdmission):
         raise TypeError("admission must be an EvidenceAdmission")
     if not isinstance(evidence_item, EvidenceItem):
