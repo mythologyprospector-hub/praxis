@@ -48,6 +48,10 @@ What is currently known for the problem, represented as explicit EvidenceItems.
 
 A proposed explanation or mechanism that could affect the problem. It is explicitly separate from EvidenceItem and does not become evidence merely by being represented.
 
+### HypothesisEvaluation
+
+An assessment of a hypothesis against explicitly referenced evidence. It records an inference and its uncertainty without becoming an EvidenceItem itself. Its evidence references identify inputs to the assessment; they do not transfer evidentiary status to the inference.
+
 ### Intervention
 
 A proposed change intended to alter an outcome.
@@ -70,12 +74,13 @@ A human decision about whether and how to proceed.
 2. **Ground** — gather and distinguish relevant evidence.
 3. **Expose gaps** — identify unknowns and uncertainties that could change the decision.
 4. **Generate** — produce candidate mechanisms and interventions.
-5. **Attack** — search for failure modes, counterexamples, harms, and unintended consequences.
-6. **Model** — use calculations, simulations, or other models when they can discriminate among candidates.
-7. **Design test** — define the smallest informative and sufficiently safe test.
-8. **Gate** — present the result and implications for human decision.
-9. **Observe** — record what actually happened.
-10. **Learn** — preserve the result as evidence and make it available to the knowledge loop.
+5. **Evaluate** — assess hypotheses against explicit evidence while preserving the distinction between evidence and inference.
+6. **Attack** — search for failure modes, counterexamples, harms, and unintended consequences.
+7. **Model** — use calculations, simulations, or other models when they can discriminate among candidates.
+8. **Design test** — define the smallest informative and sufficiently safe test.
+9. **Gate** — present the result and implications for human decision.
+10. **Observe** — record what actually happened.
+11. **Learn** — preserve the result as evidence and make it available to the knowledge loop.
 
 ## Important non-goals
 
