@@ -8,6 +8,10 @@ from __future__ import annotations
 
 from dataclasses import asdict, dataclass, field
 import json
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from praxis.result import Result
 
 
 @dataclass(frozen=True)
@@ -18,12 +22,30 @@ class EvidenceItem:
     statement: str
     provenance: str
     uncertainty: str
+    source_result_id: str | None = None
 
     def __post_init__(self) -> None:
         for name in ("id", "statement", "provenance", "uncertainty"):
             value = getattr(self, name)
             if not isinstance(value, str) or not value.strip():
                 raise ValueError(f"{name} must be a non-empty string")
+        if self.source_result_id is not None and (
+            not isinstance(self.source_result_id, str) or not self.source_result_id.strip()
+        ):
+            raise ValueError("source_result_id must be a non-empty string when provided")
+
+    @classmethod
+    def from_result(cls, result: "Result", statement: str) -> "EvidenceItem":
+        """Explicitly admit an observed Result as an evidence-bearing statement."""
+        if not isinstance(result.id, str) or not result.id.strip():
+            raise ValueError("result must have a non-empty id")
+        return cls(
+            id=f"evidence:{result.id}",
+            statement=statement,
+            provenance=result.provenance,
+            uncertainty=result.uncertainty,
+            source_result_id=result.id,
+        )
 
     def to_dict(self) -> dict[str, str]:
         return asdict(self)
