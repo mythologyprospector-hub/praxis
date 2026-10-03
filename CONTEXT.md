@@ -17,6 +17,14 @@ Its purpose is to let the steward reconstruct the current project state from the
 
 ## Current state
 
+**2026-10-03 — Phase 3 failure-mode boundary implemented**
+
+The first Phase 3 domain boundary now exists in `praxis/failure.py`, with tests in `tests/test_failure.py`. `FailureMode` represents a concrete way a candidate intervention could fail or cause harm, with severity and likelihood descriptors and optional intervention references. It remains explicitly distinct from evidence, interventions, and observed results.
+
+Commit: `14c7a9357468f8b8478b7d3c6855d0581766ebb7`.
+
+Local verification of this latest commit is pending.
+
 **2026-10-03 — Phase 2 intervention boundary implemented**
 
 The first Phase 2 domain boundary now exists in `praxis/intervention.py`, with tests in `tests/test_intervention.py`. `Intervention` represents a proposed change and intended outcome for a defined problem, with optional hypothesis references. It remains explicitly distinct from evidence and results.
