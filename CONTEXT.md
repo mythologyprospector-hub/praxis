@@ -174,3 +174,7 @@ The objective is to remember **only what future work needs**.
 **2026-10-03 — Derivation boundary implemented**
 
 `Derivation` provides explicit artifact lineage metadata without conferring evidentiary or decision authority.
+
+**2026-10-03 — Decision-scope boundary implemented**
+
+`DecisionScope` now makes the object of a human decision explicit without executing the decision or creating autonomous authority.
