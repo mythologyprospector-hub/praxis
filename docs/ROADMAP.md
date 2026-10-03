@@ -66,6 +66,12 @@ It deliberately does not claim that the intervention works.
 
 The current `CandidateRequest` makes generation inputs explicit: problem identity, evidence and gap references, requested candidate types, and constraints. It deliberately does not generate, rank, select, authorize, or execute candidates.
 
+### Failure-analysis request boundary
+
+**Status:** first bounded failure-analysis request boundary established and tested; failure-analysis machinery is not yet implemented.
+
+`FailureAnalysisRequest` makes the attack inputs explicit: problem identity, intervention references, optional hypothesis/model references, focus areas, and constraints. It deliberately does not create findings, rank candidates, assign risk judgments, authorize action, or execute anything.
+
 ## Model boundary
 
 **Status:** first bounded model boundary established and tested; model-execution machinery is not yet implemented.
