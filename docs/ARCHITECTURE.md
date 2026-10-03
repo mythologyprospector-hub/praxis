@@ -161,3 +161,7 @@ A bounded request to seek human authorization for admitting a result-derived `Ev
 ### EvaluationRequest
 
 A bounded request to evaluate a specific `Hypothesis` against explicit evidence, with optional gaps and constraints. It is a request boundary only; it does not itself produce an inference or change evidence.
+
+### ModelRequest
+
+A bounded request to construct a `Model` for a defined purpose. It makes relevant inputs, hypotheses, interventions, and constraints explicit without itself producing model outputs or decisions.
