@@ -186,3 +186,7 @@ The objective is to remember **only what future work needs**.
 **2026-10-03 — Test-design request boundary implemented**
 
 `TestRequest` makes interventions and supporting hypotheses, failure modes, models, and constraints explicit inputs to test design without granting design or execution authority.
+
+**2026-10-03 — Result-capture request boundary implemented**
+
+`ResultRequest` makes the inputs to observation capture explicit while preserving the distinction between a request, an observed result, evidence, and a human decision.
