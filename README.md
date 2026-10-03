@@ -47,9 +47,15 @@ The loop is intentionally incomplete until evidence returns from the world.
 
 ## Current status
 
-Phase 0 is established. Phase 1 has begun with an inspectable `Problem` domain object, deterministic serialization, and CI-verified tests.
+Phase 0 is established. Phase 1 now has an inspectable problem/evidence substrate and an explicit evaluation boundary, all covered by tests.
 
-The next Phase 1 objective is to establish the evidence-state boundary: what Praxis may treat as known for a problem, how provenance and uncertainty are represented, and how that remains distinct from hypotheses and proposals.
+The Phase 1 epistemic boundary distinguishes:
+
+- evidence-bearing statements, with provenance and uncertainty;
+- hypotheses, which are proposed explanations or mechanisms;
+- evaluations, which record inferences about hypotheses, their uncertainty, and the evidence considered.
+
+The implementation currently has deterministic serialization and a locally verified pytest suite.
 
 ## Integration
 
