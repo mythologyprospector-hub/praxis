@@ -38,7 +38,7 @@ A problem is not complete merely because it has a title. It should carry the goa
 
 ### ReasoningContext
 
-An immutable snapshot pairing a defined `Problem` with the matching `EvidenceState`. It is an input boundary for reasoning machinery, not an inference or decision. It refuses evidence belonging to another problem.
+An immutable snapshot pairing a defined `Problem` with matching grounded inputs: `EvidenceState` and zero or more `EvidenceGap` objects. It is an input boundary for reasoning machinery, not an inference or decision. It refuses evidence or gaps belonging to another problem.
 
 ### EvidenceItem
 
