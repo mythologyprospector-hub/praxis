@@ -12,7 +12,7 @@ def _request() -> DecisionRequest:
 
 
 def _decision() -> Decision:
-    return Decision(id="decision-1", problem_id="problem-1", decision="Proceed with bounded test.", rationale="Human choice.", decided_by="human-1")
+    return Decision(id="decision-1", problem_id="problem-1", decision="Proceed with bounded test.", rationale="Human choice.", decided_by="human-1", subject_id="subject-1")
 
 
 def test_matching_request_accepts_decision() -> None:
@@ -22,6 +22,15 @@ def test_matching_request_accepts_decision() -> None:
 def test_wrong_problem_rejected() -> None:
     decision = Decision(id="decision-1", problem_id="problem-2", decision="Proceed.", rationale="Choice.", decided_by="human-1")
     with pytest.raises(ValueError, match="problem"):
+        assemble_decision(_request(), decision)
+
+
+def test_wrong_subject_rejected() -> None:
+    decision = Decision(
+        id="decision-1", problem_id="problem-1", subject_id="subject-2",
+        decision="Proceed.", rationale="Choice.", decided_by="human-1"
+    )
+    with pytest.raises(ValueError, match="subject"):
         assemble_decision(_request(), decision)
 
 
