@@ -198,3 +198,7 @@ The objective is to remember **only what future work needs**.
 **2026-10-03 — Evaluation request boundary implemented**
 
 `EvaluationRequest` now makes hypothesis/evidence/gap inputs to evaluation explicit while preserving the distinction between evidence, requested assessment, and resulting inference.
+
+**2026-10-03 — Model-request boundary implemented**
+
+`ModelRequest` makes the purpose and inputs to bounded model construction explicit without granting execution, evidentiary, or decision authority.
