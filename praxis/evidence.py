@@ -10,6 +10,8 @@ from dataclasses import asdict, dataclass, field
 import json
 from typing import TYPE_CHECKING
 
+from praxis.admission import EvidenceAdmission
+
 if TYPE_CHECKING:
     from praxis.result import Result
 
@@ -74,6 +76,16 @@ class EvidenceState:
             "problem_id": self.problem_id,
             "items": [item.to_dict() for item in self.items],
         }
+
+    def admit(self, item: EvidenceItem, admission: EvidenceAdmission) -> "EvidenceState":
+        """Return a new state after an explicit authorization is presented."""
+        if admission.problem_id != self.problem_id:
+            raise ValueError("admission problem_id does not match evidence state")
+        if admission.evidence_item_id != item.id:
+            raise ValueError("admission evidence_item_id does not match evidence item")
+        if item in self.items:
+            return self
+        return EvidenceState(problem_id=self.problem_id, items=self.items + (item,))
 
     def to_json(self) -> str:
         """Serialize deterministically for storage and later transport."""
