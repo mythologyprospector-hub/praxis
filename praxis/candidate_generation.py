@@ -31,6 +31,22 @@ class CandidateGenerationResult:
     candidate_set: CandidateSet
     derivations: tuple[Derivation, ...] = ()
 
+    @property
+    def id(self) -> str:
+        return self.candidate_set.id
+
+    @property
+    def problem_id(self) -> str:
+        return self.candidate_set.problem_id
+
+    @property
+    def hypothesis_ids(self) -> tuple[str, ...]:
+        return self.candidate_set.hypothesis_ids
+
+    @property
+    def intervention_ids(self) -> tuple[str, ...]:
+        return self.candidate_set.intervention_ids
+
 @runtime_checkable
 class CandidateGenerator(Protocol):
     """Provider boundary for generating unranked candidate artifacts."""
