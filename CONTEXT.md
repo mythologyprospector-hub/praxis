@@ -170,3 +170,7 @@ The objective is to remember **only what future work needs**.
 **2026-10-03 — Failure-analysis result boundary implemented**
 
 `FailureAnalysis` now provides a bounded result artifact linking a failure-analysis request to explicit failure-mode identities while preserving uncertainty. It remains distinct from evidence, decisions, authorization, and execution.
+
+**2026-10-03 — Derivation boundary implemented**
+
+`Derivation` provides explicit artifact lineage metadata without conferring evidentiary or decision authority.
