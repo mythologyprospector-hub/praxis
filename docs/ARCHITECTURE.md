@@ -141,3 +141,7 @@ No integration is justified merely because it is technically possible.
 ### DecisionScope
 
 An explicit linkage between a recorded human `Decision` and the bounded test or intervention it governs. It clarifies decision scope without executing the decision or granting authority to the linkage itself.
+
+### ResultScope
+
+An explicit linkage between an observed `Result`, its bounded `Test`, and any interventions under test. It clarifies what was actually tested without turning the result into evidence or a decision.
