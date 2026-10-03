@@ -74,3 +74,7 @@ Praxis now represents a human decision as a distinct `Decision` object. It recor
 ### 2026-10-03 — Candidate generation receives an explicit request boundary
 
 `CandidateRequest` records the defined problem, explicit evidence and gap references, requested candidate types, and generation constraints. It is not itself a candidate and carries no ranking, selection, authorization, or execution semantics. Candidate-generation machinery must consume an explicit request rather than relying on hidden inputs.
+
+### 2026-10-03 — Failure analysis receives an explicit request boundary
+
+`FailureAnalysisRequest` makes the interventions and supporting context to be attacked explicit. The request carries no failure finding, severity judgment, ranking, authorization, or execution semantics; those remain separate capabilities.
