@@ -152,7 +152,7 @@ It is deliberately distinct from the test plan and is not automatically promoted
 
 Connect results back into the problem's evidence state and, where appropriate, to Episteme.
 
-**Status:** the bounded closed loop is composed and CI-verified through explicit human decision and evidence-admission gates; cross-domain handoff to Episteme remains future work.
+**Status:** the bounded closed loop is composed and CI-verified through explicit human decision and evidence-admission gates; the first Praxis→Episteme handoff boundary is established separately in Phase 7.
 
 A result-derived EvidenceItem must be created explicitly and retains the source Result identifier, provenance, and uncertainty. A Result is never silently promoted into evidence merely because it exists.
 
