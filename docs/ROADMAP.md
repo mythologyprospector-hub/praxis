@@ -47,7 +47,7 @@ It also has deterministic serialization suitable for later transport or persiste
 
 Represent candidate mechanisms and interventions without conflating proposals with evidence.
 
-**Status:** intervention boundary established and verified by tests; candidate-generation machinery is not yet implemented.
+**Status:** intervention and candidate-set boundaries established and verified by tests; candidate-generation machinery is not yet implemented.
 
 The current `Intervention` object records:
 
@@ -57,6 +57,8 @@ The current `Intervention` object records:
 - optional hypothesis references.
 
 It deliberately does not claim that the intervention works.
+
+`CandidateSet` now provides a minimal grouping boundary for generated hypotheses and/or interventions. It does not rank, select, authorize, or execute candidates.
 
 ## Phase 3 — Failure analysis
 
