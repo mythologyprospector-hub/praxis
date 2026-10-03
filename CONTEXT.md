@@ -17,6 +17,11 @@ Its purpose is to let the steward reconstruct the current project state from the
 
 ## Current state
 
+**2026-10-03 — Candidate-generation request boundary implemented**
+
+`CandidateRequest` now makes candidate-generation inputs explicit: problem identity, evidence and gap references, requested candidate types, and constraints. It remains a non-authoritative request boundary; generation, ranking, selection, authorization, and execution remain separate capabilities.
+
+
 **2026-10-03 — Bounded model boundary implemented**
 
 `Model` now represents a bounded calculation or simulation as a distinct analysis artifact. It records purpose, method, inputs, assumptions, outputs, and uncertainty without executing a model, promoting outputs to evidence, or making decisions.
