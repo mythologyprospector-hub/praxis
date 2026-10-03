@@ -20,6 +20,9 @@ class Test:
     reversibility: str
     decision_criteria: tuple[str, ...]
     intervention_ids: tuple[str, ...] = field(default_factory=tuple)
+    hypothesis_ids: tuple[str, ...] = field(default_factory=tuple)
+    failure_mode_ids: tuple[str, ...] = field(default_factory=tuple)
+    model_ids: tuple[str, ...] = field(default_factory=tuple)
 
     def __post_init__(self) -> None:
         for name in ("id", "problem_id", "objective", "reversibility"):
@@ -32,6 +35,9 @@ class Test:
             "safety_constraints",
             "decision_criteria",
             "intervention_ids",
+            "hypothesis_ids",
+            "failure_mode_ids",
+            "model_ids",
         ):
             value = getattr(self, name)
             if not isinstance(value, tuple):
