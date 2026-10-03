@@ -155,26 +155,33 @@ class GapDirectedCandidateGenerator:
                     )
                 )
 
-        derivations.extend(
-            Derivation(
-                id=f"{hypothesis.id}:derivation",
-                artifact_id=hypothesis.id,
-                source_ids=(gap.id,),
-                method="gap-directed candidate generation",
-                uncertainty="Candidate is a proposal generated from an explicit evidence gap; it is not evidence.",
-            )
-            for gap, hypothesis in zip(gaps, hypotheses)
-        )
-        derivations.extend(
-            Derivation(
-                id=f"{intervention.id}:derivation",
-                artifact_id=intervention.id,
-                source_ids=(gap.id,) + intervention.hypothesis_ids,
-                method="gap-directed candidate generation",
-                uncertainty="Candidate is a proposal generated from an explicit evidence gap; it is not evidence.",
-            )
-            for gap, intervention in zip(gaps, interventions)
-        )
+        for gap in gaps:
+            if "hypothesis" in request.requested_types:
+                hypothesis_id = f"{request.id}:hypothesis:{gap.id}"
+                derivations.append(
+                    Derivation(
+                        id=f"{hypothesis_id}:derivation",
+                        artifact_id=hypothesis_id,
+                        source_ids=(gap.id,),
+                        method="gap-directed candidate generation",
+                        uncertainty="Candidate is a proposal generated from an explicit evidence gap; it is not evidence.",
+                    )
+                )
+            if "intervention" in request.requested_types:
+                intervention_id = f"{request.id}:intervention:{gap.id}"
+                intervention_sources = (gap.id,)
+                if "hypothesis" in request.requested_types:
+                    intervention_sources += (f"{request.id}:hypothesis:{gap.id}",)
+                derivations.append(
+                    Derivation(
+                        id=f"{intervention_id}:derivation",
+                        artifact_id=intervention_id,
+                        source_ids=intervention_sources,
+                        method="gap-directed candidate generation",
+                        uncertainty="Candidate is a proposal generated from an explicit evidence gap; it is not evidence.",
+                    )
+                )
+
         return CandidateGenerationOutput(
             hypotheses=tuple(hypotheses),
             interventions=tuple(interventions),
