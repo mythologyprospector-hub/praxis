@@ -172,3 +172,15 @@ def test_evidence_admission_must_match_evidence_item() -> None:
 
     with pytest.raises(ValueError, match="evidence_item_id"):
         state.admit(evidence, admission)
+
+
+def test_evidence_state_rejects_duplicate_evidence_ids() -> None:
+    item = EvidenceItem(
+        id="e1",
+        statement="Observation",
+        provenance="source-1",
+        uncertainty="limited sample",
+    )
+
+    with pytest.raises(ValueError, match="unique"):
+        EvidenceState(problem_id="p1", items=(item, item))
