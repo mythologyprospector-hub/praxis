@@ -149,3 +149,66 @@ def test_generation_rejects_non_provider():
 
     with pytest.raises(TypeError, match="CandidateGenerator"):
         generate_candidates(request, _context(), object())
+
+
+def test_gap_directed_generator_creates_unranked_gap_candidates():
+    from praxis.candidate_generation import GapDirectedCandidateGenerator
+
+    request = CandidateRequest(
+        id="req-1",
+        problem_id="p-1",
+        evidence_ids=("e-1",),
+        gap_ids=("g-1",),
+    )
+    hypotheses, interventions = GapDirectedCandidateGenerator().generate(
+        request, _context()
+    )
+
+    assert len(hypotheses) == 1
+    assert len(interventions) == 1
+    assert hypotheses[0].evidence_ids == ()
+    assert interventions[0].hypothesis_ids == (hypotheses[0].id,)
+    assert "not evidence" in hypotheses[0].rationale
+
+
+def test_gap_directed_generator_respects_requested_candidate_types():
+    from praxis.candidate_generation import GapDirectedCandidateGenerator
+
+    request = CandidateRequest(
+        id="req-1",
+        problem_id="p-1",
+        gap_ids=("g-1",),
+        requested_types=("intervention",),
+    )
+    hypotheses, interventions = GapDirectedCandidateGenerator().generate(
+        request, _context()
+    )
+
+    assert hypotheses == ()
+    assert len(interventions) == 1
+    assert interventions[0].hypothesis_ids == ()
+
+
+def test_gap_directed_generator_requires_requested_gap():
+    from praxis.candidate_generation import GapDirectedCandidateGenerator
+
+    request = CandidateRequest(id="req-1", problem_id="p-1")
+
+    with pytest.raises(ValueError, match="at least one"):
+        GapDirectedCandidateGenerator().generate(request, _context())
+
+
+def test_gap_directed_generator_integrates_with_candidate_assembly():
+    from praxis.candidate_generation import GapDirectedCandidateGenerator
+
+    request = CandidateRequest(
+        id="req-1",
+        problem_id="p-1",
+        gap_ids=("g-1",),
+    )
+    result = generate_candidates(
+        request, _context(), GapDirectedCandidateGenerator()
+    )
+
+    assert result.hypothesis_ids == ("req-1:hypothesis:g-1",)
+    assert result.intervention_ids == ("req-1:intervention:g-1",)
