@@ -17,6 +17,12 @@ Its purpose is to let the steward reconstruct the current project state from the
 
 ## Current state
 
+**2026-10-02 — Phase 1 evaluation boundary implemented**
+
+The Phase 1 substrate now includes `HypothesisEvaluation` in `praxis/evaluation.py`, with tests in `tests/test_evaluation.py`. It records an inference, uncertainty, and explicit evidence references while remaining distinct from both `EvidenceItem` and `Hypothesis`.
+
+Local pytest verification reports 19 passing tests on commit `0f7fb075a553cf9f419036f789b4952bf19cb504`.
+
 **2026-10-03 — Phase 1 problem substrate started**
 
 The first executable Praxis domain object now exists in `praxis/problem.py`, with tests in `tests/test_problem.py`. It represents the human-defined problem fields required by the Phase 1 success criterion and provides deterministic JSON serialization.
