@@ -17,6 +17,12 @@ Its purpose is to let the steward reconstruct the current project state from the
 
 ## Current state
 
+**2026-10-03 — Phase 6 human-gated evidence admission boundary implemented**
+
+`EvidenceAdmission` now records explicit authorization for adding an EvidenceItem to an EvidenceState. `EvidenceState.admit(...)` requires matching problem and evidence identities and preserves the evidence object unchanged. Tests cover successful admission and cross-boundary rejection. The broader closed loop remains future work.
+
+Local verification of this latest commit is pending.
+
 **2026-10-03 — Phase 6 result-to-evidence admission boundary implemented**
 
 The first closed-loop boundary now exists in EvidenceItem.from_result(...), with tests covering explicit admission and the absence of automatic promotion. Result-derived evidence retains the source Result identifier, provenance, and uncertainty. Broader closed-loop workflow remains future work.
