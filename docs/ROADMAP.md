@@ -152,7 +152,7 @@ It is deliberately distinct from the test plan and is not automatically promoted
 
 Connect results back into the problem's evidence state and, where appropriate, to Episteme.
 
-**Status:** explicit Result-to-Evidence admission boundary is established and tested; grounded reasoning context includes evidence and explicit gaps; the remaining gap is composition of the bounded stages into a reusable workflow.
+**Status:** the bounded closed loop is composed and CI-verified through explicit human decision and evidence-admission gates; cross-domain handoff to Episteme remains future work.
 
 A result-derived EvidenceItem must be created explicitly and retains the source Result identifier, provenance, and uncertainty. A Result is never silently promoted into evidence merely because it exists.
 
