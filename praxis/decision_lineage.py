@@ -35,9 +35,12 @@ def validate_decision_lineage(
             raise TypeError("tests must contain Test objects")
         if test.problem_id != request.problem_id:
             raise ValueError("test belongs to a different problem")
+    supplied_tests_by_id = {item.id: item for item in supplied_tests}
     for result in supplied_results:
         if not isinstance(result, Result):
             raise TypeError("results must contain Result objects")
+        if result.test_id not in supplied_tests_by_id:
+            raise ValueError("result references a test outside supplied lineage")
     for item in supplied_evidence:
         if not isinstance(item, EvidenceItem):
             raise TypeError("evidence_items must contain EvidenceItem objects")
@@ -50,3 +53,7 @@ def validate_decision_lineage(
         raise ValueError("decision request references results outside supplied lineage")
     if not set(request.evidence_ids).issubset({item.id for item in supplied_evidence}):
         raise ValueError("decision request references evidence outside supplied lineage")
+    supplied_results_by_id = {item.id: item for item in supplied_results}
+    for item in supplied_evidence:
+        if item.source_result_id is not None and item.source_result_id not in supplied_results_by_id:
+            raise ValueError("evidence references a result outside supplied lineage")
