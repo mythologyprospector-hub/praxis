@@ -137,3 +137,7 @@ Those questions require explicit future decisions rather than accidental archite
 Integration with Episteme, Renaissance, or Organs should be introduced through explicit contracts.
 
 No integration is justified merely because it is technically possible.
+
+### DecisionScope
+
+An explicit linkage between a recorded human `Decision` and the bounded test or intervention it governs. It clarifies decision scope without executing the decision or granting authority to the linkage itself.
