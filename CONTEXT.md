@@ -17,6 +17,12 @@ Its purpose is to let the steward reconstruct the current project state from the
 
 ## Current state
 
+**2026-10-03 — Phase 6 result-to-evidence admission boundary implemented**
+
+The first closed-loop boundary now exists in EvidenceItem.from_result(...), with tests covering explicit admission and the absence of automatic promotion. Result-derived evidence retains the source Result identifier, provenance, and uncertainty. Broader closed-loop workflow remains future work.
+
+Local verification of this latest commit is pending.
+
 **2026-10-03 — Phase 5 observed-result boundary implemented**
 
 The first Phase 5 domain boundary now exists in `praxis/result.py`, with tests in `tests/test_result.py`. `Result` records what was observed during a bounded test, including summary, observations, provenance, uncertainty, and optional deviations. It remains distinct from the Test plan and is not automatically promoted into the evidence state.
