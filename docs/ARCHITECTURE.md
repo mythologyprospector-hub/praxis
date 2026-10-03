@@ -157,3 +157,7 @@ A bounded request to capture observations from a completed `Test`. It identifies
 ### EvidenceAdmissionRequest
 
 A bounded request to seek human authorization for admitting a result-derived `EvidenceItem`. It identifies the problem, source `Result`, proposed evidence identity, and rationale. It does not itself authorize admission.
+
+### EvaluationRequest
+
+A bounded request to evaluate a specific `Hypothesis` against explicit evidence, with optional gaps and constraints. It is a request boundary only; it does not itself produce an inference or change evidence.
