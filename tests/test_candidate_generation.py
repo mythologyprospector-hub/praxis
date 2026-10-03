@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import pytest
 
-from praxis.candidate_generation import assemble_candidate_set, generate_candidates
+from praxis.candidate_generation import CandidateGenerationOutput, assemble_candidate_set, generate_candidates
 from praxis.context import ReasoningContext
 from praxis.evidence import EvidenceItem, EvidenceState
 from praxis.gap import EvidenceGap
@@ -95,10 +95,13 @@ def test_assembly_rejects_wrong_request_type():
 
 class _Generator:
     def generate(self, request, context):
-        return (
-            (Hypothesis(id="h-1", problem_id=request.problem_id, statement="h", rationale="r"),),
-            (Intervention(id="i-1", problem_id=request.problem_id, description="d", intended_outcome="o"),),
-        )
+        from praxis.derivation import Derivation
+        hypothesis = Hypothesis(id="h-1", problem_id=request.problem_id, statement="h", rationale="r")
+        intervention = Intervention(id="i-1", problem_id=request.problem_id, description="d", intended_outcome="o")
+        return CandidateGenerationOutput(hypotheses=(hypothesis,), interventions=(intervention,), derivations=(
+            Derivation(id="d-h", artifact_id="h-1", source_ids=("g-1",), method="test", uncertainty="u"),
+            Derivation(id="d-i", artifact_id="i-1", source_ids=("g-1",), method="test", uncertainty="u"),
+        ))
 
 
 def _context():
@@ -121,6 +124,41 @@ def test_generation_uses_explicit_context_and_provider_boundary():
 
     assert result.hypothesis_ids == ("h-1",)
     assert result.intervention_ids == ("i-1",)
+
+
+def test_generation_requires_derivation_output():
+    request = CandidateRequest(id="req-1", problem_id="p-1")
+    class _BadGenerator:
+        def generate(self, request, context):
+            return ((), ())
+    with pytest.raises(TypeError, match="CandidateGenerationOutput"):
+        generate_candidates(request, _context(), _BadGenerator())
+
+
+def test_generation_rejects_derivation_for_unknown_artifact():
+    request = CandidateRequest(id="req-1", problem_id="p-1", gap_ids=("g-1",))
+    from praxis.derivation import Derivation
+    class _BadGenerator:
+        def generate(self, request, context):
+            return CandidateGenerationOutput(
+                hypotheses=(Hypothesis(id="h-1", problem_id="p-1", statement="h", rationale="r"),),
+                derivations=(Derivation(id="d-1", artifact_id="missing", source_ids=("g-1",), method="m", uncertainty="u"),),
+            )
+    with pytest.raises(ValueError, match="outside generated"):
+        generate_candidates(request, _context(), _BadGenerator())
+
+
+def test_generation_rejects_derivation_source_outside_lineage():
+    request = CandidateRequest(id="req-1", problem_id="p-1", gap_ids=("g-1",))
+    from praxis.derivation import Derivation
+    class _BadGenerator:
+        def generate(self, request, context):
+            return CandidateGenerationOutput(
+                hypotheses=(Hypothesis(id="h-1", problem_id="p-1", statement="h", rationale="r"),),
+                derivations=(Derivation(id="d-1", artifact_id="h-1", source_ids=("missing",), method="m", uncertainty="u"),),
+            )
+    with pytest.raises(ValueError, match="outside supplied"):
+        generate_candidates(request, _context(), _BadGenerator())
 
 
 def test_generation_rejects_context_for_another_problem():
