@@ -100,3 +100,75 @@ def test_result_is_not_automatically_added_to_evidence_state() -> None:
     state = EvidenceState(problem_id="problem-1")
 
     assert result.id not in {item.source_result_id for item in state.items}
+
+
+
+def test_evidence_state_requires_explicit_admission() -> None:
+    from praxis.admission import EvidenceAdmission
+    from praxis.result import Result
+
+    result = Result(
+        id="result-1",
+        test_id="test-1",
+        summary="Observed change.",
+        observations=("The measured value changed.",),
+        provenance="measurement-log-1",
+        uncertainty="Single test run.",
+    )
+    evidence = EvidenceItem.from_result(result, "The measured value changed in the test.")
+    state = EvidenceState(problem_id="problem-1")
+    admission = EvidenceAdmission(
+        id="admission-1",
+        problem_id="problem-1",
+        evidence_item_id=evidence.id,
+        authorized_by="human-decision-1",
+        rationale="The result is appropriate for the current evidence state.",
+    )
+
+    admitted = state.admit(evidence, admission)
+
+    assert admitted.items == (evidence,)
+
+
+def test_evidence_admission_cannot_cross_problem_boundary() -> None:
+    from praxis.admission import EvidenceAdmission
+
+    evidence = EvidenceItem(
+        id="e1",
+        statement="Observation",
+        provenance="source-1",
+        uncertainty="limited sample",
+    )
+    state = EvidenceState(problem_id="problem-1")
+    admission = EvidenceAdmission(
+        id="admission-1",
+        problem_id="problem-2",
+        evidence_item_id="e1",
+        authorized_by="human-decision-1",
+        rationale="Approved.",
+    )
+
+    with pytest.raises(ValueError, match="problem_id"):
+        state.admit(evidence, admission)
+
+
+def test_evidence_admission_must_match_evidence_item() -> None:
+    from praxis.admission import EvidenceAdmission
+
+    evidence = EvidenceItem(
+        id="e1",
+        statement="Observation",
+        provenance="source-1",
+        uncertainty="limited sample",
+    )
+    state = EvidenceState(problem_id="problem-1")
+    admission = EvidenceAdmission(
+        id="admission-1",
+        problem_id="problem-1",
+        evidence_item_id="other",
+        authorized_by="human-decision-1",
+        rationale="Approved.",
+    )
+
+    with pytest.raises(ValueError, match="evidence_item_id"):
+        state.admit(evidence, admission)
