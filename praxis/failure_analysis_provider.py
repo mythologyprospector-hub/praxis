@@ -8,6 +8,8 @@ from praxis.context import ReasoningContext
 from praxis.derivation import Derivation
 from praxis.derivation_assembly import assemble_derivation
 from praxis.failure import FailureMode
+from praxis.hypothesis import Hypothesis
+from praxis.model import Model
 from praxis.failure_analysis import FailureAnalysis
 from praxis.failure_analysis_assembly import assemble_failure_analysis
 from praxis.failure_request import FailureAnalysisRequest
@@ -28,6 +30,8 @@ class FailureAnalyzer(Protocol):
         request: FailureAnalysisRequest,
         context: ReasoningContext,
         interventions: tuple[Intervention, ...],
+        hypotheses: tuple[Hypothesis, ...] = (),
+        models: tuple[Model, ...] = (),
     ) -> FailureAnalysisOutput:
         ...
 
@@ -37,6 +41,9 @@ def analyze_failures(
     context: ReasoningContext,
     interventions: tuple[Intervention, ...],
     analyzer: FailureAnalyzer,
+    *,
+    hypotheses: tuple[Hypothesis, ...] = (),
+    models: tuple[Model, ...] = (),
 ) -> FailureAnalysisOutput:
     if not isinstance(request, FailureAnalysisRequest):
         raise TypeError("request must be a FailureAnalysisRequest")
@@ -46,14 +53,26 @@ def analyze_failures(
         raise TypeError("analyzer must implement FailureAnalyzer")
     if not isinstance(interventions, tuple) or any(not isinstance(x, Intervention) for x in interventions):
         raise TypeError("interventions must be a tuple of Intervention objects")
+    if not isinstance(hypotheses, tuple) or any(not isinstance(x, Hypothesis) for x in hypotheses):
+        raise TypeError("hypotheses must be a tuple of Hypothesis objects")
+    if not isinstance(models, tuple) or any(not isinstance(x, Model) for x in models):
+        raise TypeError("models must be a tuple of Model objects")
     if context.problem.id != request.problem_id:
         raise ValueError("context belongs to a different problem")
     if {x.id for x in interventions} != set(request.intervention_ids):
         raise ValueError("supplied interventions must exactly match the request")
     if any(x.problem_id != request.problem_id for x in interventions):
         raise ValueError("intervention belongs to a different problem")
+    if {x.id for x in hypotheses} != set(request.hypothesis_ids):
+        raise ValueError("supplied hypotheses must exactly match the request")
+    if {x.id for x in models} != set(request.model_ids):
+        raise ValueError("supplied models must exactly match the request")
+    if any(x.problem_id != request.problem_id for x in hypotheses):
+        raise ValueError("hypothesis belongs to a different problem")
+    if any(x.problem_id != request.problem_id for x in models):
+        raise ValueError("model belongs to a different problem")
 
-    output = analyzer.analyze(request, context, interventions)
+    output = analyzer.analyze(request, context, interventions, hypotheses, models)
     if not isinstance(output, FailureAnalysisOutput):
         raise TypeError("analyzer must return FailureAnalysisOutput")
     assemble_failure_analysis(request, output.analysis, failure_modes=output.failure_modes)
@@ -64,7 +83,13 @@ def analyze_failures(
     if len(output.derivations) != len(output.failure_modes):
         raise ValueError("each generated failure mode must have exactly one derivation")
 
-    lineage_ids = tuple(request.intervention_ids) + tuple(request.gap_ids) + tuple(request.evidence_ids)
+    lineage_ids = (
+        tuple(request.intervention_ids)
+        + tuple(request.hypothesis_ids)
+        + tuple(request.model_ids)
+        + tuple(gap.id for gap in context.gaps)
+        + tuple(item.id for item in context.evidence.items)
+    )
     for mode, derivation in zip(output.failure_modes, output.derivations):
         if derivation.artifact_id != mode.id:
             raise ValueError("failure-mode derivation must target its finding")
