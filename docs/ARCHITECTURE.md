@@ -169,3 +169,7 @@ A bounded request to construct a `Model` for a defined purpose. It makes relevan
 ### DecisionRequest
 
 A bounded request to formulate a decision for human consideration. It makes the decision subject and supporting candidates, tests, results, evidence, and constraints explicit. It does not itself decide, authorize, or execute anything.
+
+### Candidate generation assembly
+
+`assemble_candidate_set(...)` is the first bounded candidate-stage machinery. It accepts a `CandidateRequest` plus already-generated `Hypothesis` and `Intervention` objects, validates problem identity and requested types, and groups them into a `CandidateSet`. It deliberately does not contain generation intelligence, ranking, selection, authorization, or execution.
