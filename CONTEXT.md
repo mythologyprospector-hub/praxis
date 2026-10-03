@@ -190,3 +190,7 @@ The objective is to remember **only what future work needs**.
 **2026-10-03 — Result-capture request boundary implemented**
 
 `ResultRequest` makes the inputs to observation capture explicit while preserving the distinction between a request, an observed result, evidence, and a human decision.
+
+**2026-10-03 — Evidence-admission request boundary implemented**
+
+`EvidenceAdmissionRequest` now explicitly separates requesting admission of result-derived evidence from the human authorization required by `EvidenceAdmission` and `EvidenceState.admit(...)`.
