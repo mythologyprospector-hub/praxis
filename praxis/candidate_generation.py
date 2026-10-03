@@ -128,7 +128,31 @@ class GapDirectedCandidateGenerator:
                     )
                 )
 
-        return tuple(hypotheses), tuple(interventions)
+        derivations.extend(
+            Derivation(
+                id=f"{hypothesis.id}:derivation",
+                artifact_id=hypothesis.id,
+                source_ids=(gap.id,),
+                method="gap-directed candidate generation",
+                uncertainty="Candidate is a proposal generated from an explicit evidence gap; it is not evidence.",
+            )
+            for gap, hypothesis in zip(gaps, hypotheses)
+        )
+        derivations.extend(
+            Derivation(
+                id=f"{intervention.id}:derivation",
+                artifact_id=intervention.id,
+                source_ids=(gap.id,) + intervention.hypothesis_ids,
+                method="gap-directed candidate generation",
+                uncertainty="Candidate is a proposal generated from an explicit evidence gap; it is not evidence.",
+            )
+            for gap, intervention in zip(gaps, interventions)
+        )
+        return CandidateGenerationOutput(
+            hypotheses=tuple(hypotheses),
+            interventions=tuple(interventions),
+            derivations=tuple(derivations),
+        )
 
 
 def assemble_candidate_set(
