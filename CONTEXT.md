@@ -50,27 +50,27 @@ Local verification of the earlier reasoning-context boundary completed with 43 p
 
 **2026-10-03 — Phase 6 human-gated evidence admission boundary implemented**
 
-`EvidenceAdmission` now records explicit authorization for adding an EvidenceItem to an EvidenceState. `EvidenceState.admit(...)` requires matching problem and evidence identities and preserves the evidence object unchanged. Tests cover successful admission and cross-boundary rejection. The broader closed loop remains future work.
+`EvidenceAdmission` now records explicit authorization for adding an EvidenceItem to an EvidenceState. `EvidenceState.admit(...)` requires matching problem and evidence identities and preserves the evidence object unchanged. Tests cover successful admission and cross-boundary rejection. The bounded workflow composition now reaches this gate explicitly.
 
 Local verification completed in the current repository state; see the later verified entries.
 
 **2026-10-03 — Phase 6 result-to-evidence admission boundary implemented**
 
-The first closed-loop boundary now exists in EvidenceItem.from_result(...), with tests covering explicit admission and the absence of automatic promotion. Result-derived evidence retains the source Result identifier, provenance, and uncertainty. Broader closed-loop workflow remains future work.
+The first closed-loop boundary now exists in EvidenceItem.from_result(...), with tests covering explicit admission and the absence of automatic promotion. Result-derived evidence retains the source Result identifier, provenance, and uncertainty. The bounded workflow composition now connects this boundary through explicit human admission.
 
-Local verification of this latest commit is pending.
+GitHub Actions verification is recorded in the later CI-verified workflow entry.
 
 **2026-10-03 — Phase 5 observed-result boundary implemented**
 
 The first Phase 5 domain boundary now exists in `praxis/result.py`, with tests in `tests/test_result.py`. `Result` records what was observed during a bounded test, including summary, observations, provenance, uncertainty, and optional deviations. It remains distinct from the Test plan and is not automatically promoted into the evidence state.
 
-Local verification of this latest commit is pending.
+GitHub Actions verification is recorded in the later CI-verified workflow entry.
 
 **2026-10-03 — Phase 4 bounded-test boundary implemented**
 
 The first Phase 4 domain boundary now exists in `praxis/test.py`, with tests in `tests/test_test.py`. `Test` represents a bounded plan for learning about a candidate intervention: objective, expected observations, safety constraints, reversibility, decision criteria, and optional intervention references. It remains explicitly distinct from an observed result.
 
-Local verification of this latest commit is pending.
+GitHub Actions verification is recorded in the later CI-verified workflow entry.
 
 **2026-10-03 — Phase 3 failure-mode boundary implemented**
 
@@ -217,3 +217,7 @@ The objective is to remember **only what future work needs**.
 The bounded workflow now composes the post-decision half through `complete_workflow(...)`: explicit human `Decision` → `ResultRequest`/observed `Result` → `ResultScope` → `EvidenceAdmissionRequest` → explicit human `EvidenceAdmission` → `EvidenceState`. The coordinator validates supplied lineage and delegates observation/admission to existing boundaries; it does not interpret decisions, execute interventions, or self-authorize evidence admission.
 
 Commits `c5f7cec427f67c1e7c0bd07bcba17bbdefe8e218` and `7f9271db107d9791c75f43826d5d1e66fde8919a` implement and test the composition. GitHub Actions passed for both changes. The earlier candidate-generation fixture repair is also CI-green at `55a191247e38cf3560ed8a99deedb56d2d296ed7`.
+
+**2026-10-03 — Documentation state reconciled**
+
+The roadmap and historical working-context wording now distinguish the completed bounded workflow composition from the remaining future work: cross-domain handoff and runtime/consequential capabilities remain downstream. Final `main` CI is green on commit `6225f2eecf6cbba887bf86af5e3e5aa3a110b484`.
