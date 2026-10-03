@@ -43,7 +43,7 @@ evidence
 Episteme
 ```
 
-The loop is intentionally incomplete until evidence returns from the world.
+The loop is intentionally incomplete until evidence returns from the world. Result-to-evidence admission is explicit and traceable; observed results are not silently promoted into the evidence state.
 
 ## Current status
 
