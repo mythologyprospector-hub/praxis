@@ -9,6 +9,8 @@ from praxis.test import Test
 
 def assemble_result(request: ResultRequest, result: Result, test: Test | None = None) -> Result:
     """Validate an observed Result against its explicit capture request."""
+    if not isinstance(request, ResultRequest):
+        raise TypeError("request must be a ResultRequest")
     if not isinstance(result, Result):
         raise TypeError("result must be a Result")
     if result.id == request.id:
