@@ -209,3 +209,66 @@ def test_complete_workflow_requires_predecision_test():
             ),
             EvidenceState(problem_id="problem-1"),
         )
+
+
+def test_complete_workflow_rejects_cross_problem_downstream_artifacts():
+    preparation = _preparation()
+
+    with pytest.raises(ValueError, match="different workflow problem"):
+        complete_workflow(
+            preparation,
+            DecisionRequest(
+                id="decision-request-1",
+                problem_id="problem-2",
+                subject_id="test-1",
+            ),
+            Decision(
+                id="decision-1",
+                problem_id="problem-2",
+                decision="Proceed.",
+                rationale="Human choice.",
+                decided_by="human-1",
+                subject_id="test-1",
+            ),
+            DecisionScope(
+                id="decision-scope-1",
+                decision_id="decision-1",
+                problem_id="problem-2",
+                test_id="test-1",
+            ),
+            ResultRequest(
+                id="result-request-1",
+                problem_id="problem-2",
+                test_id="test-1",
+            ),
+            Recorder(),
+            ResultScope(
+                id="result-scope-1",
+                result_id="result-1",
+                problem_id="problem-2",
+                test_id="test-1",
+            ),
+            EvidenceAdmissionRequest(
+                id="evidence-request-1",
+                problem_id="problem-2",
+                result_id="result-1",
+                evidence_item_id="evidence-1",
+                rationale="Review.",
+            ),
+            EvidenceAdmission(
+                id="admission-1",
+                problem_id="problem-2",
+                evidence_item_id="evidence-1",
+                authorized_by="human-2",
+                rationale="Admit.",
+            ),
+            EvidenceItem(
+                id="evidence-1",
+                statement="Observed.",
+                provenance="test-log",
+                uncertainty="limited",
+                source_result_id="result-1",
+            ),
+            EvidenceState(problem_id="problem-2"),
+            decision_intervention=preparation.candidates.interventions[0],
+        )
