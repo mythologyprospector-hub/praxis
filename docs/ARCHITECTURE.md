@@ -56,6 +56,10 @@ An assessment of a hypothesis against explicitly referenced evidence. It records
 
 A proposed change intended to alter an outcome for a defined problem. It may identify the hypotheses it is intended to act upon, but remains a proposal rather than evidence or a result.
 
+### FailureMode
+
+A concrete way a candidate intervention could fail or cause harm. It is an analysis object, not evidence, an intervention, or an observed result. A FailureMode may reference the intervention(s) it challenges while keeping the proposed change distinct from the analysis of how it could go wrong.
+
 ### Test
 
 A bounded method for learning whether a candidate intervention behaves as expected.
@@ -75,7 +79,7 @@ A human decision about whether and how to proceed.
 3. **Expose gaps** — identify unknowns and uncertainties that could change the decision.
 4. **Generate** — produce candidate mechanisms and interventions.
 5. **Evaluate** — assess hypotheses against explicit evidence while preserving the distinction between evidence and inference.
-6. **Attack** — search for failure modes, counterexamples, harms, and unintended consequences.
+6. **Attack** — search for failure modes, counterexamples, harms, and unintended consequences, representing concrete failure paths separately from the interventions they challenge.
 7. **Model** — use calculations, simulations, or other models when they can discriminate among candidates.
 8. **Design test** — define the smallest informative and sufficiently safe test.
 9. **Gate** — present the result and implications for human decision.
