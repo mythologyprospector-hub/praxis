@@ -17,6 +17,11 @@ Its purpose is to let the steward reconstruct the current project state from the
 
 ## Current state
 
+**2026-10-03 — Grounded boundary identity invariants hardened**
+
+`EvidenceState` now rejects duplicate evidence identities. `ReasoningContext` now requires a tuple of `EvidenceGap` objects with unique identities and matching problem ownership. Tests cover malformed and duplicate grounded inputs.
+
+
 **2026-10-03 — Grounded reasoning context boundary implemented**
 
 `ReasoningContext` pairs a Problem with its matching EvidenceState and rejects cross-problem combinations. It is deliberately an input boundary for future reasoning machinery, not an inference, decision, or mutation mechanism.
