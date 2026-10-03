@@ -10,11 +10,28 @@ This is a research/build roadmap, not a promise of implementation.
 - establish human-gating requirements;
 - establish minimal repository/test structure.
 
+**Status:** foundation established.
+
 ## Phase 1 — Problem substrate
 
 Create a minimal, inspectable representation for a defined problem.
 
-Success means a problem can be represented without losing its goals, constraints, values, non-negotiables, stakeholders, risks, and tradeoffs.
+**Status:** initial substrate implemented and verified by CI.
+
+The current `Problem` object preserves:
+
+- goal;
+- constraints;
+- values;
+- non-negotiables;
+- stakeholders;
+- known risks;
+- acceptable tradeoffs;
+- unacceptable tradeoffs.
+
+It also has deterministic serialization suitable for later transport or persistence.
+
+The remaining Phase 1 work is to establish the boundary between a Problem and its evidence state before moving into candidate generation.
 
 ## Phase 2 — Candidate generation
 
