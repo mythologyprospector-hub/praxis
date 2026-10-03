@@ -129,7 +129,7 @@ The current `Decision` boundary records a human decision, rationale, decision-ma
 
 Capture actual observations and preserve their provenance.
 
-**Status:** first observed-result boundary established and tested; result-to-evidence workflow is not yet implemented.
+**Status:** first observed-result boundary established and tested; bounded result-to-evidence admission workflow is implemented and tested.
 
 The current `Result` object records:
 
@@ -150,7 +150,7 @@ Connect results back into the problem's evidence state and, where appropriate, t
 
 A result-derived EvidenceItem must be created explicitly and retains the source Result identifier, provenance, and uncertainty. A Result is never silently promoted into evidence merely because it exists.
 
-`Result → EvidenceItem` derivation is now an explicit, tested boundary: a result-derived evidence item must carry the exact source Result identifier. `EvidenceAdmission` is the human-gating boundary: it records who authorized admission, the rationale, and the exact problem/evidence identities. `EvidenceState.admit(...)` requires that authorization and refuses cross-problem or mismatched-evidence admission.
+`Result → EvidenceItem` derivation is now an explicit, tested boundary: a result-derived evidence item must carry the exact source Result identifier. `EvidenceAdmission` is the human-gating boundary: it records who authorized admission, the rationale, and the exact problem/evidence identities. `EvidenceState.admit(...)` requires that authorization and refuses cross-problem or mismatched-evidence admission. `admit_result_as_evidence(...)` now composes these boundaries into one explicit closed-loop transition without granting the transition any autonomous authorization.
 
 ## Phase 7 — Cross-domain reasoning
 
@@ -221,3 +221,9 @@ Every phase requires explicit review before the next consequential capability is
 **Status:** first bounded candidate-stage assembly implemented and tested.
 
 Candidate artifacts can now be validated and grouped under an explicit `CandidateRequest`. Actual candidate-generation reasoning remains a separate future capability.
+
+### Decision-request lineage assembly
+
+**Status:** first bounded decision-request artifact lineage validation implemented and tested.
+
+`validate_decision_lineage(...)` verifies that the candidate sets, tests, results, and evidence explicitly referenced by a `DecisionRequest` are supplied and belong to the request's problem where applicable. It does not make, rank, authorize, or execute the decision.
