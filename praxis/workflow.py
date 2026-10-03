@@ -9,6 +9,20 @@ from dataclasses import dataclass
 
 from praxis.candidate_generation import CandidateGenerationResult, CandidateGenerator, generate_candidates
 from praxis.candidate_request import CandidateRequest
+from praxis.decision import Decision
+from praxis.decision_assembly import assemble_decision
+from praxis.decision_request import DecisionRequest
+from praxis.decision_scope import DecisionScope
+from praxis.decision_scope_assembly import assemble_decision_scope
+from praxis.evidence import EvidenceItem, EvidenceState
+from praxis.admission import EvidenceAdmission
+from praxis.evidence_admission_request import EvidenceAdmissionRequest
+from praxis.intervention import Intervention
+from praxis.result_evidence_admission import admit_result_as_evidence
+from praxis.result_request import ResultRequest
+from praxis.result_provider import ResultRecorder, record_result
+from praxis.result_scope import ResultScope
+from praxis.result_scope_assembly import assemble_result_scope
 from praxis.context import ReasoningContext
 from praxis.evaluation_provider import EvaluationOutput, HypothesisEvaluator, evaluate_hypothesis
 from praxis.evaluation_request import EvaluationRequest
@@ -162,4 +176,81 @@ def prepare_workflow(
         failure_analysis=failure_analysis,
         model=model,
         test=test,
+    )
+
+
+@dataclass(frozen=True)
+class WorkflowCompletion:
+    """Validated artifacts produced after the human decision gate."""
+
+    preparation: WorkflowPreparation
+    decision_request: DecisionRequest
+    decision: Decision
+    decision_scope: DecisionScope
+    result_request: ResultRequest
+    result: Result
+    result_scope: ResultScope
+    evidence_admission_request: EvidenceAdmissionRequest
+    evidence_admission: EvidenceAdmission
+    evidence_item: EvidenceItem
+    evidence_state: EvidenceState
+
+
+def complete_workflow(
+    preparation: WorkflowPreparation,
+    decision_request: DecisionRequest,
+    decision: Decision,
+    decision_scope: DecisionScope,
+    result_request: ResultRequest,
+    recorder: ResultRecorder,
+    result_scope: ResultScope,
+    evidence_admission_request: EvidenceAdmissionRequest,
+    evidence_admission: EvidenceAdmission,
+    evidence_item: EvidenceItem,
+    evidence_state: EvidenceState,
+    *,
+    decision_intervention: Intervention | None = None,
+) -> WorkflowCompletion:
+    """Compose post-decision stages without interpreting or authorizing them."""
+    if not isinstance(preparation, WorkflowPreparation):
+        raise TypeError("preparation must be a WorkflowPreparation")
+    if preparation.test is None:
+        raise ValueError("workflow preparation must contain a designed test")
+    test = preparation.test.test
+
+    assemble_decision(
+        decision_request,
+        decision,
+        candidate_sets=(preparation.candidates.candidate_set,),
+        tests=(test,),
+    )
+    assemble_decision_scope(
+        decision_scope,
+        decision,
+        test,
+        decision_intervention,
+    )
+
+    result = record_result(result_request, test, recorder).result
+    assemble_result_scope(result_scope, result, test)
+
+    final_state = admit_result_as_evidence(
+        evidence_state,
+        evidence_admission_request,
+        evidence_admission,
+        result,
+        evidence_item,
+    )
+    return WorkflowCompletion(
+        preparation=preparation,
+        decision_request=decision_request,
+        decision=decision,
+        decision_scope=decision_scope,
+        result_request=result_request,
+        result=result,
+        result_scope=result_scope,
+        evidence_admission_request=evidence_admission_request,
+        evidence_admission=evidence_admission,
+        evidence_item=evidence_item,
+        evidence_state=final_state,
     )
