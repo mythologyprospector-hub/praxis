@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 from praxis.test import Test
-from .test_request import TestRequest
+from praxis.test_request import TestRequest
 
 
 def assemble_test(request: TestRequest, test: Test) -> Test:
