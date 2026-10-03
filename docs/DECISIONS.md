@@ -82,3 +82,7 @@ Praxis now represents a human decision as a distinct `Decision` object. It recor
 ### 2026-10-03 — Failure-analysis findings remain bounded analysis artifacts
 
 `FailureAnalysis` records the relationship between a failure-analysis request and identified failure modes while preserving uncertainty. Findings remain distinct from evidence, decisions, authorization, and execution.
+
+### 2026-10-03 — Artifact derivation is explicit
+
+`Derivation` records how an artifact was produced from explicit source identities while preserving method and uncertainty. Lineage is not silently promoted to evidence or authority.
