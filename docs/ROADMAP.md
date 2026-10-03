@@ -74,13 +74,13 @@ The current `CandidateRequest` makes generation inputs explicit: problem identit
 
 ### Failure-analysis request boundary
 
-**Status:** first bounded failure-analysis request boundary established and tested; failure-analysis machinery is not yet implemented.
+**Status:** first bounded failure-analysis request and provider boundaries established and tested; provider execution remains an external reasoning capability.
 
 `FailureAnalysisRequest` makes the attack inputs explicit: problem identity, intervention references, optional hypothesis/model references, focus areas, and constraints. It deliberately does not create findings, rank candidates, assign risk judgments, authorize action, or execute anything.
 
 ### Failure-analysis result boundary
 
-**Status:** first bounded failure-analysis result boundary established and tested; failure-analysis lineage assembly is implemented and tested; broader failure-analysis machinery is not yet implemented.
+**Status:** bounded failure-analysis result, assembly, and provider boundaries are established and tested; the provider remains an external reasoning capability.
 
 `FailureAnalysis` links a request to explicit failure-mode identities and preserves uncertainty. Its assembly boundary now validates the supplied `FailureMode` objects, their problem identity, and their intervention references against the originating request. It does not authorize, rank, execute, or convert findings into evidence automatically.
 
@@ -92,7 +92,7 @@ The current `CandidateRequest` makes generation inputs explicit: problem identit
 
 ## Model boundary
 
-**Status:** first bounded model boundary established and tested; model-execution machinery is not yet implemented.
+**Status:** bounded model boundary, assembly, and provider boundary are established and tested; model execution remains an external capability.
 
 The current `Model` object records a model's purpose, method, inputs, assumptions, outputs, and uncertainty. It deliberately does not execute a simulation, claim that outputs are true, or make decisions.
 
@@ -115,7 +115,7 @@ It is deliberately an analysis object rather than evidence or an observed result
 
 Represent bounded tests with explicit objectives, expected observations, safety constraints, reversibility, and decision criteria.
 
-**Status:** first bounded-test boundary established and tested; test execution machinery is not yet implemented.
+**Status:** bounded test boundary, assembly, and provider boundary are established and tested; test execution remains an external capability.
 
 The current `Test` object records:
 
@@ -135,7 +135,7 @@ The current `Decision` boundary records a human decision, rationale, decision-ma
 
 Capture actual observations and preserve their provenance.
 
-**Status:** first observed-result boundary established and tested; bounded result-to-evidence admission workflow is implemented and tested.
+**Status:** observed-result boundary, assembly, and bounded result-capture provider are established and tested; result-to-evidence admission is explicit and human-gated.
 
 The current `Result` object records:
 
@@ -152,7 +152,7 @@ It is deliberately distinct from the test plan and is not automatically promoted
 
 Connect results back into the problem's evidence state and, where appropriate, to Episteme.
 
-**Status:** explicit Result-to-Evidence admission boundary established and tested; grounded reasoning context now includes both evidence and explicit gaps; broader closed-loop workflow is not yet implemented.
+**Status:** explicit Result-to-Evidence admission boundary is established and tested; grounded reasoning context includes evidence and explicit gaps; the remaining gap is composition of the bounded stages into a reusable workflow.
 
 A result-derived EvidenceItem must be created explicitly and retains the source Result identifier, provenance, and uncertainty. A Result is never silently promoted into evidence merely because it exists.
 
