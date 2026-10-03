@@ -36,6 +36,9 @@ def assemble_candidate_set(
     intervention_ids = {item.id for item in interventions}
     if hypothesis_ids & intervention_ids:
         raise ValueError("candidate ids must be unique across candidate types")
+    intervention_ids = {item.id for item in interventions}
+    if hypothesis_ids & intervention_ids:
+        raise ValueError("candidate ids must be unique across candidate types")
     for item in interventions:
         if not isinstance(item, Intervention):
             raise TypeError("interventions must contain Intervention objects")
