@@ -27,9 +27,8 @@ def test_assembly_groups_generated_candidates_under_request():
 
     assert result.id == "req-1:candidates"
     assert result.problem_id == "p-1"
-    assert result.candidate_set.hypothesis_ids == ("h-1",)
-    assert result.candidate_set.intervention_ids == ("i-1",)
-    assert len(result.derivations) == 2
+    assert result.hypothesis_ids == ("h-1",)
+    assert result.intervention_ids == ("i-1",)
 
 
 def test_assembly_rejects_candidates_from_another_problem():
@@ -252,3 +251,7 @@ def test_gap_directed_generator_integrates_with_candidate_assembly():
 
     assert result.hypothesis_ids == ("req-1:hypothesis:g-1",)
     assert result.intervention_ids == ("req-1:intervention:g-1",)
+    assert {d.artifact_id for d in result.derivations} == {
+        "req-1:hypothesis:g-1",
+        "req-1:intervention:g-1",
+    }
