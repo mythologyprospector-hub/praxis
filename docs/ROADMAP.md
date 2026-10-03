@@ -209,3 +209,9 @@ Every phase requires explicit review before the next consequential capability is
 **Status:** first bounded decision-request boundary established and tested.
 
 `DecisionRequest` separates a request for decision formulation from the resulting human `Decision`. The request may carry candidate, test, result, evidence, and constraint references, but it has no decision or execution authority.
+
+### Candidate assembly machinery
+
+**Status:** first bounded candidate-stage assembly implemented and tested.
+
+Candidate artifacts can now be validated and grouped under an explicit `CandidateRequest`. Actual candidate-generation reasoning remains a separate future capability.
