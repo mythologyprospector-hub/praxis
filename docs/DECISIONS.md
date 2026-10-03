@@ -25,3 +25,7 @@ A hypothesis is represented as a proposal with explicit rationale and problem as
 ### 2026-10-03 — Evaluation remains distinct from evidence
 
 A hypothesis evaluation records an inference, uncertainty, and explicit references to the evidence considered. Recording an inference does not make it evidence, and referencing evidence does not change the epistemic status of the evaluation.
+
+### 2026-10-03 — Intervention remains a proposal
+
+An intervention records a proposed change and intended outcome for a defined problem, with optional links to hypotheses. It does not carry evidentiary status and does not imply that the intended outcome has occurred.
