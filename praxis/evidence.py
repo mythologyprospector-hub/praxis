@@ -70,6 +70,9 @@ class EvidenceState:
             raise TypeError("items must be a tuple of EvidenceItem")
         if any(not isinstance(item, EvidenceItem) for item in self.items):
             raise TypeError("items must contain only EvidenceItem instances")
+        ids = [item.id for item in self.items]
+        if len(ids) != len(set(ids)):
+            raise ValueError("evidence item ids must be unique")
 
     def to_dict(self) -> dict[str, object]:
         return {
