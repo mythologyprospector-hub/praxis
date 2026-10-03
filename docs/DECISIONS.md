@@ -18,7 +18,10 @@ Praxis must search for ways an intervention could fail or cause harm rather than
 
 The initial implementation should establish inspectable representations, provenance, tests, and boundaries before adding autonomous or consequential behavior.
 
-
 ### 2026-10-03 — Evidence and hypothesis remain separate
 
 A hypothesis is represented as a proposal with explicit rationale and problem association. It is not an evidence object and does not gain evidentiary status merely by being generated or stored.
+
+### 2026-10-03 — Evaluation remains distinct from evidence
+
+A hypothesis evaluation records an inference, uncertainty, and explicit references to the evidence considered. Recording an inference does not make it evidence, and referencing evidence does not change the epistemic status of the evaluation.
