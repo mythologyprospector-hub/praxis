@@ -16,6 +16,8 @@ def assemble_failure_analysis(
     failure_modes: Iterable[FailureMode] = (),
 ) -> FailureAnalysis:
     """Validate failure-analysis findings against their explicit request and modes."""
+    if not isinstance(request, FailureAnalysisRequest):
+        raise TypeError("request must be a FailureAnalysisRequest")
     if not isinstance(analysis, FailureAnalysis):
         raise TypeError("analysis must be a FailureAnalysis")
     if analysis.id == request.id:
