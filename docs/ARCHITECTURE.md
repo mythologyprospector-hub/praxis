@@ -68,6 +68,10 @@ A proposed change intended to alter an outcome for a defined problem. It may ide
 
 A bounded collection of candidate hypotheses and/or interventions considered together for a defined problem. It provides grouping without ranking, selecting, authorizing, or executing a candidate. Candidate identity within each collection is unique, and at least one candidate is required.
 
+### Model
+
+A bounded calculation or simulation used to explore a defined problem. It records purpose, method, inputs, assumptions, outputs, and uncertainty. A Model is an analysis artifact, not evidence, a decision, or an executed intervention.
+
 ### FailureMode
 
 A concrete way a candidate intervention could fail or cause harm. It is an analysis object, not evidence, an intervention, or an observed result. A FailureMode may reference the intervention(s) it challenges while keeping the proposed change distinct from the analysis of how it could go wrong.
