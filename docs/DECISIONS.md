@@ -62,3 +62,7 @@ Praxis should represent material unknowns explicitly rather than forcing absence
 ### 2026-10-03 — Grounded reasoning context includes explicit gaps
 
 A reasoning input should preserve both what is currently supported by evidence and what remains materially unknown. `ReasoningContext` therefore carries matching `EvidenceState` plus zero or more `EvidenceGap` objects, rejecting cross-problem gaps just as it rejects cross-problem evidence.
+
+### 2026-10-03 — Grounded boundary identities must be unique
+
+Evidence and gap collections are state-bearing inputs, so duplicate identities would make provenance and references ambiguous. `EvidenceState` rejects duplicate EvidenceItem IDs, and `ReasoningContext` rejects malformed or duplicate EvidenceGap identities.
