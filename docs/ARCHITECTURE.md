@@ -153,3 +153,7 @@ A bounded request to design a `Test` for explicit candidate interventions. It ca
 ### ResultRequest
 
 A bounded request to capture observations from a completed `Test`. It identifies the test and optional expected observations/interventions but does not create evidence, make a decision, or execute anything.
+
+### EvidenceAdmissionRequest
+
+A bounded request to seek human authorization for admitting a result-derived `EvidenceItem`. It identifies the problem, source `Result`, proposed evidence identity, and rationale. It does not itself authorize admission.
