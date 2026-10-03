@@ -2,11 +2,47 @@
 from __future__ import annotations
 
 from collections.abc import Iterable
+from typing import Protocol
+
+from praxis.context import ReasoningContext
 
 from praxis.candidate import CandidateSet
 from praxis.candidate_request import CandidateRequest
 from praxis.hypothesis import Hypothesis
 from praxis.intervention import Intervention
+
+
+class CandidateGenerator(Protocol):
+    """Provider boundary for generating unranked candidate artifacts."""
+
+    def generate(
+        self, request: CandidateRequest, context: ReasoningContext
+    ) -> tuple[Iterable[Hypothesis], Iterable[Intervention]]:
+        """Generate candidate artifacts without ranking, selecting, or executing them."""
+
+
+def generate_candidates(
+    request: CandidateRequest,
+    context: ReasoningContext,
+    generator: CandidateGenerator,
+) -> CandidateSet:
+    """Generate and validate candidates through an explicit provider boundary."""
+    if not isinstance(request, CandidateRequest):
+        raise TypeError("request must be a CandidateRequest")
+    if not isinstance(context, ReasoningContext):
+        raise TypeError("context must be a ReasoningContext")
+    if not isinstance(generator, CandidateGenerator):
+        raise TypeError("generator must implement CandidateGenerator")
+    if context.problem.id != request.problem_id:
+        raise ValueError("context belongs to a different problem")
+    if not set(request.evidence_ids).issubset({item.id for item in context.evidence.items}):
+        raise ValueError("request references evidence outside the reasoning context")
+    if not set(request.gap_ids).issubset({gap.id for gap in context.gaps}):
+        raise ValueError("request references gaps outside the reasoning context")
+    hypotheses, interventions = generator.generate(request, context)
+    return assemble_candidate_set(
+        request, hypotheses=hypotheses, interventions=interventions
+    )
 
 
 def assemble_candidate_set(
