@@ -17,9 +17,15 @@ Its purpose is to let the steward reconstruct the current project state from the
 
 ## Current state
 
+**2026-10-03 — Phase 2 intervention boundary implemented**
+
+The first Phase 2 domain boundary now exists in `praxis/intervention.py`, with tests in `tests/test_intervention.py`. `Intervention` represents a proposed change and intended outcome for a defined problem, with optional hypothesis references. It remains explicitly distinct from evidence and results.
+
+Local pytest verification reports 23 passing tests on commit `7910b70d08dd4279a37dd5b532b839a2db88e205`.
+
 **2026-10-02 — Phase 1 evaluation boundary implemented**
 
-The Phase 1 substrate now includes `HypothesisEvaluation` in `praxis/evaluation.py`, with tests in `tests/test_evaluation.py`. It records an inference, uncertainty, and explicit evidence references while remaining distinct from both `EvidenceItem` and `Hypothesis`.
+The Phase 1 substrate includes `HypothesisEvaluation` in `praxis/evaluation.py`, with tests in `tests/test_evaluation.py`. It records an inference, uncertainty, and explicit evidence references while remaining distinct from both `EvidenceItem` and `Hypothesis`.
 
 Local pytest verification reports 19 passing tests on commit `0f7fb075a553cf9f419036f789b4952bf19cb504`.
 
