@@ -17,6 +17,12 @@ Its purpose is to let the steward reconstruct the current project state from the
 
 ## Current state
 
+**2026-10-03 — Phase 5 observed-result boundary implemented**
+
+The first Phase 5 domain boundary now exists in `praxis/result.py`, with tests in `tests/test_result.py`. `Result` records what was observed during a bounded test, including summary, observations, provenance, uncertainty, and optional deviations. It remains distinct from the Test plan and is not automatically promoted into the evidence state.
+
+Local verification of this latest commit is pending.
+
 **2026-10-03 — Phase 4 bounded-test boundary implemented**
 
 The first Phase 4 domain boundary now exists in `praxis/test.py`, with tests in `tests/test_test.py`. `Test` represents a bounded plan for learning about a candidate intervention: objective, expected observations, safety constraints, reversibility, decision criteria, and optional intervention references. It remains explicitly distinct from an observed result.
