@@ -46,6 +46,68 @@ def generate_candidates(
     )
 
 
+
+class GapDirectedCandidateGenerator:
+    """Generate conservative candidates directly from explicit evidence gaps."""
+
+    def generate(
+        self, request: CandidateRequest, context: ReasoningContext
+    ) -> tuple[tuple[Hypothesis, ...], tuple[Intervention, ...]]:
+        gaps = tuple(gap for gap in context.gaps if gap.id in request.gap_ids)
+        if not gaps:
+            raise ValueError(
+                "GapDirectedCandidateGenerator requires at least one requested evidence gap"
+            )
+
+        hypotheses = []
+        interventions = []
+
+        for gap in gaps:
+            hypothesis_id = f"{request.id}:hypothesis:{gap.id}"
+            if "hypothesis" in request.requested_types:
+                hypotheses.append(
+                    Hypothesis(
+                        id=hypothesis_id,
+                        problem_id=request.problem_id,
+                        statement=(
+                            f"Resolving the evidence gap '{gap.description}' may "
+                            f"change which options are justified for the goal "
+                            f"'{context.problem.goal}'."
+                        ),
+                        rationale=(
+                            f"Generated from gap '{gap.id}', whose decision relevance "
+                            f"is '{gap.decision_relevance}'. This is a proposal, "
+                            "not evidence."
+                        ),
+                    )
+                )
+
+            if "intervention" in request.requested_types:
+                interventions.append(
+                    Intervention(
+                        id=f"{request.id}:intervention:{gap.id}",
+                        problem_id=request.problem_id,
+                        description=(
+                            f"Conduct a bounded investigation of evidence gap "
+                            f"'{gap.description}' that can distinguish materially "
+                            "different explanations or next steps."
+                        ),
+                        intended_outcome=(
+                            "Reduce the uncertainty represented by the gap with "
+                            "newly grounded information, subject to the request "
+                            "constraints."
+                        ),
+                        hypothesis_ids=(
+                            (hypothesis_id,)
+                            if "hypothesis" in request.requested_types
+                            else ()
+                        ),
+                    )
+                )
+
+        return tuple(hypotheses), tuple(interventions)
+
+
 def assemble_candidate_set(
     request: CandidateRequest,
     *,
