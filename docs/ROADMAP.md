@@ -179,3 +179,9 @@ Every phase requires explicit review before the next consequential capability is
 **Status:** first bounded test-design request boundary established and tested.
 
 `TestRequest` makes intervention and supporting analysis inputs explicit before test design. Test generation and execution machinery remain unimplemented.
+
+### Result-capture request boundary
+
+**Status:** first bounded result-capture request boundary established and tested.
+
+`ResultRequest` makes the test and observation-capture inputs explicit before a `Result` is recorded. It does not promote observations to evidence or make decisions.
