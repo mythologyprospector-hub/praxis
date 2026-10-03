@@ -129,3 +129,8 @@ The first candidate-stage machinery validates and groups externally produced hyp
 The workflow coordinator may compose established bounded stages, but composition must not collapse semantic boundaries. The post-decision path is explicitly `Decision → ResultRequest/Result → ResultScope → EvidenceAdmissionRequest → EvidenceAdmission → EvidenceState`. A `Decision` remains a human decision rather than execution; a `Result` remains observation rather than evidence; an admission request grants no authority; and `EvidenceState.admit(...)` remains the actual evidence-state transition. The coordinator validates lineage and orchestrates supplied providers without interpreting the decision or silently authorizing, executing, ranking, selecting, or canonizing anything.
 
 The composition and dedicated workflow tests are CI-verified. Organs integration remains downstream of stable domain semantics.
+
+### 2026-10-03 — Completed workflow composition enforces one problem boundary
+
+The composed post-decision workflow now validates that every downstream request, scope, authorization, and evidence state belongs to the same problem as the prepared workflow before invoking later stages. Individual assembly boundaries remain responsible for artifact identity and lineage. No new workflow identity semantics are introduced; the existing problem identity is the composition boundary.
+
