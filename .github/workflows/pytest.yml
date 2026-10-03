@@ -1,0 +1,35 @@
+name: pytest
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  pytest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install pytest
+        run: python -m pip install --upgrade pip pytest
+
+      - name: Run pytest
+        shell: bash
+        run: |
+          shopt -s nullglob
+          tests=(tests/test_*.py tests/*/test_*.py)
+          if ((${#tests[@]} == 0)); then
+            echo "No pytest test files exist yet; CI is configured and ready for them."
+            exit 0
+          fi
+          python -m pytest -q
