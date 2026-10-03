@@ -42,7 +42,7 @@ A single evidence-bearing statement. It must retain provenance and an explicit d
 
 ### EvidenceState
 
-What is currently known for the problem, represented as explicit EvidenceItems.
+What is currently known for the problem, represented as explicit EvidenceItems. Adding an item requires a matching `EvidenceAdmission`, which records the authorization, rationale, problem, and evidence identity.
 
 ### Hypothesis
 
@@ -70,7 +70,7 @@ What was observed when a bounded test was performed. A Result records the observ
 
 ### Decision
 
-A human decision about whether and how to proceed.
+A human decision about whether and how to proceed. Evidence admission is one such consequential epistemic decision and is recorded separately from the evidence itself.
 
 ## Proposed pipeline
 
