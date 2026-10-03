@@ -173,3 +173,9 @@ Every phase requires explicit review before the next consequential capability is
 **Status:** first explicit result-scope boundary established and tested.
 
 `ResultScope` links an observed `Result` to its bounded test and optional intervention identities. It preserves experimental scope without promoting results to evidence or decisions.
+
+### Test-design request boundary
+
+**Status:** first bounded test-design request boundary established and tested.
+
+`TestRequest` makes intervention and supporting analysis inputs explicit before test design. Test generation and execution machinery remain unimplemented.
