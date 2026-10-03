@@ -55,10 +55,8 @@ def test_assembly_rejects_missing_lineage(field: str, expected: tuple[str, ...])
         failure_mode_ids=("failure-1",),
         model_ids=("model-1",),
     )
-    supplied = dict(_test().__dict__)
-    supplied[field] = expected
     with pytest.raises(ValueError):
-        assemble_test(request, _test(**{field: expected[:-1]}))
+        assemble_test(request, _test(**{field: expected}))
 
 
 def test_assembly_rejects_wrong_problem() -> None:
