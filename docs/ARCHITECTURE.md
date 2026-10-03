@@ -172,9 +172,13 @@ A bounded request to formulate a decision for human consideration. It makes the 
 
 ### Candidate generation assembly
 
-`generate_candidates(...)` is the bounded candidate-generation workflow. It validates the provider boundary, preserves a `CandidateSet` together with explicit `Derivation` traces, and keeps generation lineage distinct from evidence, evaluation, ranking, selection, authorization, and execution.
+`generate_candidates(...)` is the bounded candidate-generation workflow. It validates the provider boundary, preserves a `CandidateSet` together with exactly one explicit `Derivation` trace per generated candidate, and keeps generation lineage distinct from evidence, evaluation, ranking, selection, authorization, and execution.
 
 `assemble_candidate_set(...)` is the first bounded candidate-stage machinery. It accepts a `CandidateRequest` plus already-generated `Hypothesis` and `Intervention` objects, validates problem identity and requested types, and groups them into a `CandidateSet`. It deliberately does not contain generation intelligence, ranking, selection, authorization, or execution.
+
+### Hypothesis evaluation provider boundary
+
+`evaluate_hypothesis(...)` is the bounded evaluation workflow. It validates an explicit `EvaluationRequest`, matching `ReasoningContext` and `Hypothesis`, requires an `EvaluationOutput`, validates the resulting `HypothesisEvaluation`, and requires its `Derivation` to target that evaluation and draw only from the supplied hypothesis/evidence/gap lineage. The provider produces an inference; it does not modify evidence or make a decision.
 
 ### Decision lineage assembly
 
