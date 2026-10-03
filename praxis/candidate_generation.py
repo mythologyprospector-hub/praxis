@@ -79,13 +79,19 @@ def generate_candidates(
     if not isinstance(output, CandidateGenerationOutput):
         raise TypeError("generator must return CandidateGenerationOutput")
     candidate_ids = {item.id for item in output.hypotheses} | {item.id for item in output.interventions}
+    derivation_by_artifact: dict[str, Derivation] = {}
     for derivation in output.derivations:
         if derivation.artifact_id not in candidate_ids:
             raise ValueError("derivation targets an artifact outside generated candidates")
+        if derivation.artifact_id in derivation_by_artifact:
+            raise ValueError("each generated candidate must have exactly one derivation")
         assemble_derivation(
             derivation,
             tuple(candidate_ids) + tuple(request.gap_ids) + tuple(request.evidence_ids),
         )
+        derivation_by_artifact[derivation.artifact_id] = derivation
+    if set(derivation_by_artifact) != candidate_ids:
+        raise ValueError("each generated candidate must have exactly one derivation")
     candidate_set = assemble_candidate_set(
         request, hypotheses=output.hypotheses, interventions=output.interventions
     )
