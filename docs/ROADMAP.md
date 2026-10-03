@@ -191,3 +191,9 @@ Every phase requires explicit review before the next consequential capability is
 **Status:** first explicit request boundary established and tested.
 
 `EvidenceAdmissionRequest` separates asking for admission of result-derived evidence from the actual human authorization recorded by `EvidenceAdmission`. A request never silently authorizes admission.
+
+### Evaluation request boundary
+
+**Status:** first bounded evaluation request boundary established and tested.
+
+`EvaluationRequest` makes the hypothesis, evidence, gaps, and constraints entering evaluation explicit. Evaluation machinery remains distinct from the evidence state and from the resulting `HypothesisEvaluation`.
