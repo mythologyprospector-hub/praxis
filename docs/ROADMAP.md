@@ -161,3 +161,9 @@ Investigate carefully bounded use of Renaissance outputs.
 Only after the earlier substrate is stable should Praxis be considered for carefully bounded real-world problem-solving workflows.
 
 Every phase requires explicit review before the next consequential capability is added.
+
+### Decision-scope boundary
+
+**Status:** first explicit decision-scope boundary established and tested.
+
+`DecisionScope` links a human `Decision` to a defined problem and at least one bounded test or intervention. It does not execute the decision or create autonomous authority.
