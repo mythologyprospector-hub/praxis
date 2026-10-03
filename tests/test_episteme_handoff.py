@@ -92,7 +92,7 @@ def test_episteme_handoff_requires_prior_admission():
 def test_episteme_handoff_does_not_infer_record_kind_or_capture_time():
     state, item, admission = _admitted()
 
-    with pytest.raises(TypeError):
+    with pytest.raises(ValueError, match="record_kind"):
         prepare_episteme_handoff(
             state,
             item,
