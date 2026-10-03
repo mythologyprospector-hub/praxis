@@ -53,3 +53,7 @@ Adding evidence to an EvidenceState is an epistemic state change, so it must not
 ### 2026-10-03 — Reasoning consumes an explicit grounded context
 
 Reasoning machinery should receive an immutable context pairing the defined Problem with its matching EvidenceState. The context is an input boundary only: it does not infer, rank, decide, or mutate evidence. A context cannot combine evidence belonging to another problem.
+
+### 2026-10-03 — Missing knowledge is a first-class reasoning input
+
+Praxis should represent material unknowns explicitly rather than forcing absence of evidence into evidence, inference, or hypothesis objects. `EvidenceGap` records the unknown and why it could matter to a decision; it does not assert what the answer is.
