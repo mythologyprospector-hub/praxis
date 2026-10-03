@@ -41,3 +41,7 @@ A Test defines a bounded way to learn about a candidate intervention, including 
 ### 2026-10-03 — Results remain distinct from evidence until incorporated
 
 A Result records what was observed during a bounded test, including provenance and uncertainty. It is distinct from the Test plan and is not automatically treated as part of the problem's evidence state. A later closed-loop workflow must explicitly determine when and how results become evidence.
+
+### 2026-10-03 — Result-to-evidence promotion is explicit and traceable
+
+A Result must not silently become evidence. The first closed-loop boundary uses explicit EvidenceItem.from_result(...) admission and retains the source Result identifier, provenance, and uncertainty. Broader workflow and decision criteria remain future work.
