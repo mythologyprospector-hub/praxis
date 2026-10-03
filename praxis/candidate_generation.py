@@ -33,6 +33,9 @@ def assemble_candidate_set(
             raise ValueError("hypothesis references evidence outside the request")
 
     hypothesis_ids = {item.id for item in hypotheses}
+    intervention_ids = {item.id for item in interventions}
+    if hypothesis_ids & intervention_ids:
+        raise ValueError("candidate ids must be unique across candidate types")
     for item in interventions:
         if not isinstance(item, Intervention):
             raise TypeError("interventions must contain Intervention objects")
