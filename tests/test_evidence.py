@@ -65,3 +65,38 @@ def test_evidence_state_serialization_is_deterministic():
 def test_evidence_state_requires_evidence_items():
     with pytest.raises(TypeError, match="EvidenceItem"):
         EvidenceState(problem_id="p1", items=("not evidence",))
+
+
+
+def test_result_must_be_explicitly_admitted_as_evidence() -> None:
+    from praxis.result import Result
+
+    result = Result(
+        id="result-1",
+        test_id="test-1",
+        summary="Observed change.",
+        observations=("The measured value changed.",),
+        provenance="measurement-log-1",
+        uncertainty="Single test run.",
+    )
+    evidence = EvidenceItem.from_result(result, "The measured value changed in the test.")
+
+    assert evidence.source_result_id == "result-1"
+    assert evidence.provenance == result.provenance
+    assert evidence.uncertainty == result.uncertainty
+
+
+def test_result_is_not_automatically_added_to_evidence_state() -> None:
+    from praxis.result import Result
+
+    result = Result(
+        id="result-1",
+        test_id="test-1",
+        summary="Observed change.",
+        observations=("The measured value changed.",),
+        provenance="measurement-log-1",
+        uncertainty="Single test run.",
+    )
+    state = EvidenceState(problem_id="problem-1")
+
+    assert result.id not in {item.source_result_id for item in state.items}
