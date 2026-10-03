@@ -38,7 +38,7 @@ A problem is not complete merely because it has a title. It should carry the goa
 
 ### EvidenceItem
 
-A single evidence-bearing statement. It must retain provenance and an explicit description of uncertainty.
+A single evidence-bearing statement. It must retain provenance and an explicit description of uncertainty. A result-derived EvidenceItem records its source Result so the admission path remains inspectable.
 
 ### EvidenceState
 
