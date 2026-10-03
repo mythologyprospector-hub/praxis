@@ -21,6 +21,13 @@ class ReasoningContext:
     def __post_init__(self) -> None:
         if self.evidence.problem_id != self.problem.id:
             raise ValueError("evidence state problem_id does not match problem")
+        if not isinstance(self.gaps, tuple):
+            raise TypeError("gaps must be a tuple of EvidenceGap")
+        if any(not isinstance(gap, EvidenceGap) for gap in self.gaps):
+            raise TypeError("gaps must contain only EvidenceGap instances")
+        gap_ids = [gap.id for gap in self.gaps]
+        if len(gap_ids) != len(set(gap_ids)):
+            raise ValueError("evidence gap ids must be unique")
         for gap in self.gaps:
             if gap.problem_id != self.problem.id:
                 raise ValueError("evidence gap problem_id does not match problem")
