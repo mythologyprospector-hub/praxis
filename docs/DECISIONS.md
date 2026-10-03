@@ -66,3 +66,7 @@ A reasoning input should preserve both what is currently supported by evidence a
 ### 2026-10-03 — Grounded boundary identities must be unique
 
 Evidence and gap collections are state-bearing inputs, so duplicate identities would make provenance and references ambiguous. `EvidenceState` rejects duplicate EvidenceItem IDs, and `ReasoningContext` rejects malformed or duplicate EvidenceGap identities.
+
+### 2026-10-03 — Human decisions are explicit domain records
+
+Praxis now represents a human decision as a distinct `Decision` object. It records what was decided, why, the human decision reference, and optionally the subject of the decision. Recording a decision does not execute it; consequential action remains a separate boundary.
