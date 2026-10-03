@@ -70,3 +70,4 @@ Evidence and gap collections are state-bearing inputs, so duplicate identities w
 ### 2026-10-03 — Human decisions are explicit domain records
 
 Praxis now represents a human decision as a distinct `Decision` object. It records what was decided, why, the human decision reference, and optionally the subject of the decision. Recording a decision does not execute it; consequential action remains a separate boundary.
+\n### 2026-10-03 — Candidate generation remains non-authoritative\n\n`CandidateSet` groups candidate hypotheses and interventions for a defined problem without ranking, selecting, authorizing, or executing them. Candidate generation must remain distinct from human decision and consequential action.\n
