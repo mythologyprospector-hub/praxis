@@ -67,9 +67,12 @@ Explicit request boundaries are also established and tested for candidate genera
 
 The corresponding assembly boundaries validate that produced artifacts belong to the requests and problems that claim them, including supplied artifact lineage where applicable. Result-derived evidence requires explicit source-result lineage and a separate human admission boundary.
 
-**What is not yet implemented:** general candidate-generation reasoning, general failure-analysis reasoning, model execution, test execution, automated real-world action, and the broader cross-domain handoff into Episteme. The bounded domain workflow itself is now composed and tested; these capabilities remain separate future work rather than implicit behavior of the current substrate.
+**What is not yet implemented:** general candidate-generation reasoning, general failure-analysis reasoning, model execution, test execution, automated real-world action, and runtime integration with Organs. The bounded domain workflow and its explicit Praxis→Episteme translation boundary are now tested; direct runtime coupling and broader cross-domain reasoning remain separate future work.
 
 ## Integration
+
+Praxis now defines an explicit, runtime-independent handoff packet for admitted evidence to cross into Episteme without changing its identity or authority. See the Episteme handoff boundary in `episteme_handoff.py` and the durable integration notes in `docs/INTEGRATION.md`.
+
 
 See [docs/INTEGRATION.md](docs/INTEGRATION.md) for the current Organs boundary. Runtime integration is deliberately downstream of stable domain semantics.
 
