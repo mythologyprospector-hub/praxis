@@ -5,18 +5,27 @@ from collections.abc import Iterable
 
 from .evaluation import HypothesisEvaluation
 from .evaluation_request import EvaluationRequest
+from .hypothesis import Hypothesis
 
 
 def assemble_evaluation(
     request: EvaluationRequest,
     evaluation: HypothesisEvaluation,
+    hypothesis: Hypothesis | None = None,
 ) -> HypothesisEvaluation:
     """Validate an evaluation against its explicit request boundary."""
     if not isinstance(evaluation, HypothesisEvaluation):
         raise TypeError("evaluation must be a HypothesisEvaluation")
     if evaluation.id.strip() != evaluation.id:
         raise ValueError("evaluation id must not have surrounding whitespace")
-    if evaluation.hypothesis_id != request.hypothesis_id:
+    if hypothesis is not None:
+        if not isinstance(hypothesis, Hypothesis):
+            raise TypeError("hypothesis must be a Hypothesis")
+        if hypothesis.id != request.hypothesis_id:
+            raise ValueError("hypothesis does not match request")
+        if hypothesis.problem_id != request.problem_id:
+            raise ValueError("hypothesis belongs to a different problem")
+    elif evaluation.hypothesis_id != request.hypothesis_id:
         raise ValueError("evaluation targets a different hypothesis")
     if evaluation.id == request.id:
         raise ValueError("evaluation identity must differ from request identity")
