@@ -63,7 +63,8 @@ def _result() -> Result:
     return Result(id="result-1", test_id="test-1", summary="Observed outcome.", observations=("outcome",), provenance="experiment-log", uncertainty="moderate")
 
 def test_matching_result_lineage_accepts_admission() -> None:
-    assert assemble_evidence_admission(_request(), _admission(), _item(source_result_id="result-1"), _result()) is _admission()
+    admission = _admission()
+    assert assemble_evidence_admission(_request(), admission, _item(source_result_id="result-1"), _result()) is admission
 
 def test_wrong_result_rejected() -> None:
     result = Result(id="result-2", test_id="test-1", summary="Observed outcome.", observations=("outcome",), provenance="experiment-log", uncertainty="moderate")
