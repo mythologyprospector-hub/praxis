@@ -138,3 +138,8 @@ The composed post-decision workflow now validates that every downstream request,
 ### 2026-10-03 — Workflow preparation retains grounded decision inputs
 
 A completed workflow must preserve the ReasoningContext used during preparation so the human decision boundary can validate references to pre-existing evidence. Decision formulation may depend on grounded evidence already present before the test; the coordinator must pass those evidence items into decision-lineage assembly rather than narrowing the decision gate to newly generated candidates and tests. This preserves provenance without turning evidence into authority or allowing the coordinator to interpret the decision.
+
+
+### 2026-10-03 — Cross-domain handoff preserves identity across the Praxis/Episteme boundary
+
+Praxis evidence is translated into an explicit handoff packet rather than passed directly as an Episteme object. The packet preserves the original Praxis evidence and human-admission identities, while Episteme record kind, source identity, and capture time remain explicit inputs because Praxis does not currently own those semantics. The handoff does not generate an Episteme record ID, infer epistemic status, authorize admission, or add a runtime dependency on Episteme. A future Episteme-side adapter may consume this packet and create an Episteme Record with its own identity.
