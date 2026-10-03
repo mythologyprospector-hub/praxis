@@ -27,8 +27,9 @@ def test_assembly_groups_generated_candidates_under_request():
 
     assert result.id == "req-1:candidates"
     assert result.problem_id == "p-1"
-    assert result.hypothesis_ids == ("h-1",)
-    assert result.intervention_ids == ("i-1",)
+    assert result.candidate_set.hypothesis_ids == ("h-1",)
+    assert result.candidate_set.intervention_ids == ("i-1",)
+    assert len(result.derivations) == 2
 
 
 def test_assembly_rejects_candidates_from_another_problem():
