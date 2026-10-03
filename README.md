@@ -47,7 +47,7 @@ The loop is intentionally incomplete until evidence returns from the world.
 
 ## Current status
 
-Phase 0 is established. Phase 1 is established with inspectable problem/evidence/epistemic boundaries. Phase 2 has begun with an explicit `Intervention` boundary, Phase 3 with an explicit `FailureMode` boundary, and Phase 4 with an explicit `Test` boundary.
+Phase 0 is established. Phase 1 is established with inspectable problem/evidence/epistemic boundaries. Phase 2 has begun with an explicit `Intervention` boundary, Phase 3 with an explicit `FailureMode` boundary, Phase 4 with an explicit `Test` boundary, and Phase 5 with an explicit `Result` boundary.
 
 The current substrate distinguishes:
 
@@ -56,9 +56,10 @@ The current substrate distinguishes:
 - evaluations, which record inferences about hypotheses, their uncertainty, and the evidence considered;
 - interventions, which are proposed changes with intended outcomes;
 - failure modes, which are explicit analyses of how candidate interventions could fail or cause harm;
-- tests, which are bounded plans for learning about candidate interventions.
+- tests, which are bounded plans for learning about candidate interventions;
+- results, which record observations from performed tests with provenance and uncertainty.
 
-The implementation currently has deterministic serialization and dedicated tests for these domain boundaries. Broader candidate-generation, failure-analysis, and test-execution machinery remains ahead on the roadmap.
+The implementation currently has deterministic serialization and dedicated tests for these domain boundaries. Broader candidate-generation, failure-analysis, test-execution, and result-to-evidence machinery remains ahead on the roadmap.
 
 ## Integration
 
