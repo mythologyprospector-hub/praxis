@@ -38,7 +38,7 @@ A problem is not complete merely because it has a title. It should carry the goa
 
 ### ReasoningContext
 
-An immutable snapshot pairing a defined `Problem` with matching grounded inputs: `EvidenceState` and zero or more `EvidenceGap` objects. It is an input boundary for reasoning machinery, not an inference or decision. It refuses evidence or gaps belonging to another problem.
+An immutable snapshot pairing a defined `Problem` with matching grounded inputs: `EvidenceState` and zero or more uniquely identified `EvidenceGap` objects. It is an input boundary for reasoning machinery, not an inference or decision. It refuses cross-problem inputs and malformed or duplicate gap identities.
 
 ### EvidenceItem
 
@@ -46,7 +46,7 @@ A single evidence-bearing statement. It must retain provenance and an explicit d
 
 ### EvidenceState
 
-What is currently known for the problem, represented as explicit EvidenceItems. Adding an item requires a matching `EvidenceAdmission`, which records the authorization, rationale, problem, and evidence identity.
+What is currently known for the problem, represented as explicit EvidenceItems with unique identities. Adding an item requires a matching `EvidenceAdmission`, which records the authorization, rationale, problem, and evidence identity.
 
 ### EvidenceGap
 
