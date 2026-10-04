@@ -1,3 +1,5 @@
+![Praxis social preview](praxis.jpeg)
+
 # Praxis
 
 A human-centered solution-discovery engine for turning defined problems into testable, safe interventions.
