@@ -9,7 +9,7 @@ Praxis is intended to help people move from **a problem worth solving** toward *
 ## Role in the larger system
 
 - **Episteme** — understand what is known, unknown, uncertain, contradictory, and testable.
-- **Renaissance** — discover relationships, structures, and possibilities across domains.
+- **Renaissance** — the human-centered foundation and wider constellation that establishes shared purpose, principles, capability boundaries, and explicit ways for independent instruments to cooperate. Its current human-facing aims are to increase humanity's ability to understand, explore, create, learn, and flourish.
 - **Praxis** — work from a defined human problem toward candidate interventions, tests, and evidence.
 - **Organs** — provide shared runtime infrastructure through explicit contracts when integration is justified.
 
