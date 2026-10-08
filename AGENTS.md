@@ -19,8 +19,8 @@ The implementation agent must not silently become the architectural authority. I
 **Do not depend on conversational context. Read the repository.**
 
 Before substantial work:
-1. Read CONTEXT.md.
-2. Read CANON.md.
+1. Read `CONTEXT.md`.
+2. Read `CANON.md`.
 3. Read the relevant architecture/roadmap/decision artifacts.
 4. Inspect the actual repository state and existing tests.
 5. Determine the next task from repository evidence.
@@ -30,13 +30,13 @@ Before substantial work:
 
 The repository is authoritative for project history and recorded decisions. Conversation is temporary working space.
 
-## Context discipline
+## Context discipline — Miracle Tokens
 
-Do not turn this file or CONTEXT.md into a transcript.
+Use **targeted grounding**: retrieve the smallest sufficient set of current repository state, canon, decisions, implementation, and tests needed for the task. Broaden the inspection when safety, architecture, cross-project boundaries, or uncertainty require it.
 
-Record only information that a future steward/agent needs in order to reconstruct why the current repository state exists. Prefer concise dated entries and links to concrete artifacts, commits, tests, or external evidence.
+Do not repeatedly reconstruct the whole project in conversation. Do not carry forward project details merely because they appeared earlier in chat.
 
-Never present speculation as established fact. Never silently erase historical decisions; supersede them with an explicit record when necessary.
+This does **not** mean deleting or compressing durable knowledge. Preserve project-specific documentation, provenance, decisions, historical rationale, and unresolved questions. Update the appropriate existing source of truth when new information will matter to future work.
 
 ## Change discipline
 
