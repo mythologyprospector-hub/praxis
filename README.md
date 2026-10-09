@@ -1,4 +1,4 @@
-![Praxis social preview](praxis.jpeg)
+![Praxis social preview](assets/praxis.jpeg)
 
 # Praxis
 
